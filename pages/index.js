@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 function Home() {
+=======
+import { Button } from 'react-bootstrap';
+import { signOut } from '../utils/auth';
+import { useAuth } from '../utils/context/authContext';
+
+function Home() {
+  const { user } = useAuth();
+
+>>>>>>> origin/with-auth
   return (
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"
@@ -9,7 +19,15 @@ function Home() {
         margin: '0 auto',
       }}
     >
+<<<<<<< HEAD
       <h1>Welcome Home! </h1>
+=======
+      <h1>Hello {user.displayName}! </h1>
+      <p>Click the button below to logout!</p>
+      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+        Sign Out
+      </Button>
+>>>>>>> origin/with-auth
     </div>
   );
 }
