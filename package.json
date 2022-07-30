@@ -1,8 +1,8 @@
 {
-  "name": "next-firebase-starter",
+  "name": "YooTube",
   "private": true,
   "version": "1.0.0",
-  "author": "Trinity Christiana",
+  "author": "HalloweenTown BlueLegs",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -24,10 +24,7 @@
     "next": "12.0.7",
     "prop-types": "^15.7.2",
     "react": "17.0.2",
-<<<<<<< HEAD
-=======
     "react-bootstrap": "^2.4.0",
->>>>>>> origin/with-auth
     "react-dom": "17.0.2"
   },
   "devDependencies": {

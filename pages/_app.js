@@ -1,18 +1,6 @@
 /* eslint-disable react/prop-types */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
-<<<<<<< HEAD
-import NavBar from '../components/NavBar';
-
-function MyApp({ Component, pageProps }) {
-  return (
-    <>
-      <NavBar />
-      <div className="container">
-        <Component {...pageProps} />
-      </div>
-    </>
-=======
 import { AuthProvider } from '../utils/context/authContext';
 import ViewDirectorBasedOnUserAuthStatus from '../utils/ViewDirector';
 
@@ -27,7 +15,6 @@ function MyApp({ Component, pageProps }) {
         pageProps={pageProps}
       />
     </AuthProvider>
->>>>>>> origin/with-auth
   );
 }
 
