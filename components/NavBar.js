@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
 import {
   Navbar, Container, Nav, Button,
 } from 'react-bootstrap';
@@ -24,6 +25,9 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
+            <Nav.Item>
+              { user ? <Button><VideoCallIcon /></Button> : <></>}
+            </Nav.Item>
             <Nav.Item className="ms-auto">
               { user ? <Button variant="danger" onClick={signOut}><LogoutIcon /></Button> : <Button variant="primary" onClick={signIn}><LoginIcon /></Button>}
             </Nav.Item>
