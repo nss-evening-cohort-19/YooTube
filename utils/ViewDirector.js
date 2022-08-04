@@ -4,7 +4,7 @@ import Loading from '../components/Loading';
 // import Signin from '../components/Signin';
 // import NavBar from '../components/NavBar';
 // import SideBar from '../components/SideBar';
-import PersistentDrawerLeft from '../components/NavBar';
+import MiniDrawer from '../components/NavBar';
 
 const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) => {
   const { userLoading } = useAuth();
@@ -17,7 +17,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
   // what the user should see if they are logged in
   return (
     <>
-      <PersistentDrawerLeft />
+      <MiniDrawer />
       <div className="container">
         <Component {...pageProps} />
       </div>
