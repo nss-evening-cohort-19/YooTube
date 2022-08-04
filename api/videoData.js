@@ -9,14 +9,6 @@ const getSingleVideo = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const splitVideoId = async (videoFirebaseKey) => {
-  const videoObj = await getSingleVideo(videoFirebaseKey);
-  console.warn(videoObj);
-  const embedURL = videoObj.videoURL;
-  const lastIndex = embedURL.lastIndexOf('/');
-  return embedURL.slice(lastIndex + 1);
-};
-
 const createVideo = (videoObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/videos.json`, videoObj)
     .then((response) => {
@@ -47,5 +39,5 @@ const updateVideo = (videoObject) => new Promise((resolve, reject) => {
 });
 
 export {
-  createVideo, updateVideo, getVideos, splitVideoId,
+  createVideo, updateVideo, getVideos, getSingleVideo,
 };

@@ -5,14 +5,14 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { createVideo, splitVideoId, updateVideo } from '../../api/videoData';
+import { createVideo, updateVideo } from '../../api/videoData';
 
 const initialState = {
   likes: 0,
   views: 0,
 };
 
-function PlayerForm({ obj }) {
+function VideoForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
   // eslint-disable-next-line no-unused-vars
   const [categories, setCategories] = useState([]);
@@ -40,18 +40,15 @@ function PlayerForm({ obj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.warn(date());
     if (obj.firebaseKey) {
       updateVideo(formInput)
         .then(() => router.push('/yourVideos'));
     } else {
+      const lastIndex = formInput.videoURL.lastIndexOf('/');
       const payload = {
-        ...formInput, uid: user.uid, date: date(), creatorName: user.displayName, creatorImage: user.photoURL,
+        ...formInput, uid: user.uid, date: date(), creatorName: user.displayName, creatorImage: user.photoURL, videoId: formInput.videoURL.slice(lastIndex + 1),
       };
-      createVideo(payload).then((videoFirebaseKey) => splitVideoId(videoFirebaseKey).then((embedURL) => {
-        const idPayload = { videoId: embedURL };
-        updateVideo(idPayload);
-      })).then(() => router.push('/yourVideos'));
+      createVideo(payload).then(() => router.push('/yourVideos'));
     }
   };
 
@@ -139,7 +136,7 @@ function PlayerForm({ obj }) {
   );
 }
 
-PlayerForm.propTypes = {
+VideoForm.propTypes = {
   obj: PropTypes.shape({
     image: PropTypes.string,
     name: PropTypes.string,
@@ -150,8 +147,8 @@ PlayerForm.propTypes = {
   }),
 };
 
-PlayerForm.defaultProps = {
+VideoForm.defaultProps = {
   obj: initialState,
 };
 
-export default PlayerForm;
+export default VideoForm;
