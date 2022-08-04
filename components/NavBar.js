@@ -143,9 +143,11 @@ export default function MiniDrawer() {
             <Button variant="outline-dark"><SearchIcon /></Button>
           </Form>
           <Nav className="justify-content-end">
-            <Nav.Item className="ms-auto">
-              { user ? <MuiButton><VideoCallIcon className="videoCallIcon" /></MuiButton> : <></>}
-            </Nav.Item>
+            <Link passHref href="/video/new">
+              <Nav.Item className="ms-auto">
+                { user ? <MuiButton><VideoCallIcon className="videoCallIcon" /></MuiButton> : <></>}
+              </Nav.Item>
+            </Link>
             <Nav.Item className="ms-auto">
               { user ? <Button variant="danger" onClick={signOut}><LogoutIcon /></Button> : <Button variant="primary" onClick={signIn}><LoginIcon /></Button>}
             </Nav.Item>
@@ -163,24 +165,26 @@ export default function MiniDrawer() {
 
         <List>
           <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <Link passHref href="/">
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
                 }}
               >
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText sx={{ opacity: open ? 1 : 0 }}>Home</ListItemText>
-            </ListItemButton>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText sx={{ opacity: open ? 1 : 0 }}>Home</ListItemText>
+              </ListItemButton>
+            </Link>
           </ListItem>
           <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemButton
@@ -211,64 +215,70 @@ export default function MiniDrawer() {
             ? (
               <>
                 <ListItem disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                    sx={{
-                      minHeight: 48,
-                      justifyContent: open ? 'initial' : 'center',
-                      px: 2.5,
-                    }}
-                  >
-                    <ListItemIcon
+                  <Link passHref href="/video/new">
+                    <ListItemButton
                       sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : 'auto',
-                        justifyContent: 'center',
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
                       }}
                     >
-                      <AddAPhoto />
-                    </ListItemIcon>
-                    <ListItemText sx={{ opacity: open ? 1 : 0 }}>Upload</ListItemText>
-                  </ListItemButton>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <AddAPhoto />
+                      </ListItemIcon>
+                      <ListItemText sx={{ opacity: open ? 1 : 0 }}>Upload</ListItemText>
+                    </ListItemButton>
+                  </Link>
                 </ListItem>
                 <ListItem disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                    sx={{
-                      minHeight: 48,
-                      justifyContent: open ? 'initial' : 'center',
-                      px: 2.5,
-                    }}
-                  >
-                    <ListItemIcon
+                  <Link passHref href="/yourVideos">
+                    <ListItemButton
                       sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : 'auto',
-                        justifyContent: 'center',
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
                       }}
                     >
-                      <PlayCircleOutlineIcon />
-                    </ListItemIcon>
-                    <ListItemText sx={{ opacity: open ? 1 : 0 }}>Your Videos</ListItemText>
-                  </ListItemButton>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <PlayCircleOutlineIcon />
+                      </ListItemIcon>
+                      <ListItemText sx={{ opacity: open ? 1 : 0 }}>Your Videos</ListItemText>
+                    </ListItemButton>
+                  </Link>
                 </ListItem>
                 <ListItem disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                    sx={{
-                      minHeight: 48,
-                      justifyContent: open ? 'initial' : 'center',
-                      px: 2.5,
-                    }}
-                  >
-                    <ListItemIcon
+                  <Link passHref href="/likedVideos">
+                    <ListItemButton
                       sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : 'auto',
-                        justifyContent: 'center',
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
                       }}
                     >
-                      <ThumbUpOffAltIcon />
-                    </ListItemIcon>
-                    <ListItemText sx={{ opacity: open ? 1 : 0 }}>Liked Videos</ListItemText>
-                  </ListItemButton>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <ThumbUpOffAltIcon />
+                      </ListItemIcon>
+                      <ListItemText sx={{ opacity: open ? 1 : 0 }}>Liked Videos</ListItemText>
+                    </ListItemButton>
+                  </Link>
                 </ListItem>
               </>
             )
