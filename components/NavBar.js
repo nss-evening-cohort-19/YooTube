@@ -19,14 +19,16 @@ import {
   Navbar, Nav, Button, Form,
 } from 'react-bootstrap';
 import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
+// import LogoutIcon from '@mui/icons-material/Logout';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import ExploreIcon from '@mui/icons-material/Explore';
-import { Button as MuiButton, ListItemText } from '@mui/material';
+import {
+  Avatar, Button as MuiButton, ListItemText, Menu, MenuItem,
+} from '@mui/material';
 import { AddAPhoto } from '@mui/icons-material';
 import HomeIcon from '@mui/icons-material/Home';
 import Image from 'next/image';
@@ -114,6 +116,15 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openMenu = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -148,12 +159,45 @@ export default function MiniDrawer() {
           </Form>
           <Nav className="justify-content-end">
             <Link passHref href="/video/new">
-              <Nav.Item className="ms-auto">
+              <Nav.Item className="ms-auto d-flex">
                 { user ? <MuiButton><VideoCallIcon className="videoCallIcon" /></MuiButton> : <></>}
               </Nav.Item>
             </Link>
-            <Nav.Item className="ms-auto">
-              { user ? <Button variant="danger" onClick={signOut}><LogoutIcon /></Button> : <Button variant="primary" onClick={signIn}><LoginIcon /></Button>}
+            <Nav.Item className="ms-auto d-flex">
+              { user
+                ? (
+                  <div>
+                    <muiButton
+                      id="demo-positioned-button"
+                      aria-controls={openMenu ? 'demo-positioned-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={openMenu ? 'true' : undefined}
+                      onClick={handleClick}
+                    >
+                      <Avatar alt={user.displayName} src={user.photoURL} />
+                    </muiButton>
+                    <Menu
+                      id="demo-positioned-menu"
+                      aria-labelledby="demo-positioned-button"
+                      anchorEl={anchorEl}
+                      open={openMenu}
+                      onClose={handleClose}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                      }}
+                    >
+                      <MenuItem onClick={handleClose}><muiButton onClick={signOut}>Sign Out</muiButton></MenuItem>
+                    </Menu>
+                  </div>
+                )
+                : (
+                  <Button variant="primary" onClick={signIn}><LoginIcon /></Button>
+                )}
             </Nav.Item>
           </Nav>
         </Toolbar>
