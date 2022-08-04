@@ -28,6 +28,7 @@ body {
 .searchBar {
   margin-right: 10px;
   width: 30rem;
+  justify-content: center;
 }
 
 .drawerIcon {

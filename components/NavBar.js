@@ -19,7 +19,7 @@ import {
   Navbar, Nav, Button, Form,
 } from 'react-bootstrap';
 import LoginIcon from '@mui/icons-material/Login';
-// import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from '@mui/icons-material/Logout';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
@@ -148,22 +148,24 @@ export default function MiniDrawer() {
               <Image src={svgicon} alt="youtube" />
             </Navbar.Brand>
           </Link>
-          <Form className="d-flex ms-auto searchBar">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-dark"><SearchIcon /></Button>
-          </Form>
+          <Nav.Item className="searchBar ms-auto">
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+              />
+              <Button variant="outline-dark"><SearchIcon /></Button>
+            </Form>
+          </Nav.Item>
           <Nav className="justify-content-end">
             <Link passHref href="/video/new">
-              <Nav.Item className="ms-auto d-flex">
+              <Nav.Item className="d-flex">
                 { user ? <MuiButton><VideoCallIcon className="videoCallIcon" /></MuiButton> : <></>}
               </Nav.Item>
             </Link>
-            <Nav.Item className="ms-auto d-flex">
+            <Nav.Item className="d-flex">
               { user
                 ? (
                   <div>
@@ -183,20 +185,20 @@ export default function MiniDrawer() {
                       open={openMenu}
                       onClose={handleClose}
                       anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
+                        vertical: 'bottom',
+                        horizontal: 'center',
                       }}
                       transformOrigin={{
                         vertical: 'top',
-                        horizontal: 'left',
+                        horizontal: 'center',
                       }}
                     >
-                      <MenuItem onClick={handleClose}><muiButton onClick={signOut}>Sign Out</muiButton></MenuItem>
+                      <MenuItem onClick={handleClose}><muiButton onClick={signOut}><LogoutIcon /> Sign Out</muiButton></MenuItem>
                     </Menu>
                   </div>
                 )
                 : (
-                  <Button variant="primary" onClick={signIn}><LoginIcon /></Button>
+                  <muiButton variant="primary" onClick={signIn}><LoginIcon className="drawerIcon" /></muiButton>
                 )}
             </Nav.Item>
           </Nav>
