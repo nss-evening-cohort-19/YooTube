@@ -1,21 +1,26 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import { useAuth } from '../utils/context/authContext';
+import PropTypes from 'prop-types';
+import { Card, Image } from 'react-bootstrap/Card';
 
-function CommentCard() {
-  const { user } = useAuth();
+function CommentCard({ commentObj }) {
   return (
     <Card style={{ width: '36rem' }}>
-      <Card.Img src={user.photoURL} />
+      <Image src={commentObj.photoURL} />
       <Card.Body>
-        <Card.Title>{ user.displayName }e</Card.Title>
-        <Card.Text>
-          { user.commentText }
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Card.Text>{ commentObj.displayName }</Card.Text>
+        <Card.Text>{ commentObj.commentText }</Card.Text>
+        <Card.Text>{ commentObj.date }</Card.Text>
       </Card.Body>
     </Card>
   );
 }
+
+CommentCard.propTypes = {
+  commentObj: PropTypes.shape({
+    photoURL: PropTypes.string,
+    commentText: PropTypes.string,
+    displayName: PropTypes.string,
+    date: PropTypes.string,
+  }).isRequired,
+};
 
 export default CommentCard;
