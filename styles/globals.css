@@ -22,10 +22,14 @@ body {
 }
 
 .videoCallIcon {
-  color: white;
+  color: black;
 }
 
 .searchBar {
   margin-right: 10px;
   width: 30rem;
+}
+
+.drawerIcon {
+  color: black;
 }

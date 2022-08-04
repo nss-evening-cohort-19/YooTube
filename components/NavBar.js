@@ -29,6 +29,8 @@ import ExploreIcon from '@mui/icons-material/Explore';
 import { Button as MuiButton, ListItemText } from '@mui/material';
 import { AddAPhoto } from '@mui/icons-material';
 import HomeIcon from '@mui/icons-material/Home';
+import Image from 'next/image';
+import svgicon from '../icons/icons8-youtube.svg';
 import { useAuth } from '../utils/context/authContext';
 import { signIn, signOut } from '../utils/auth';
 
@@ -116,7 +118,7 @@ export default function MiniDrawer() {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
 
-      <AppBar position="fixed" open={open}>
+      <AppBar style={{ background: '#ffffff' }} position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -128,10 +130,12 @@ export default function MiniDrawer() {
               ...(open && { display: 'none' }),
             }}
           >
-            <MenuIcon />
+            <MenuIcon className="drawerIcon" />
           </IconButton>
           <Link passHref href="/">
-            <Navbar.Brand>CHANGE ME</Navbar.Brand>
+            <Navbar.Brand>
+              <Image src={svgicon} alt="youtube" />
+            </Navbar.Brand>
           </Link>
           <Form className="d-flex ms-auto searchBar">
             <Form.Control
