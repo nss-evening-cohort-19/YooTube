@@ -24,6 +24,7 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import SearchIcon from '@mui/icons-material/Search';
 import ExploreIcon from '@mui/icons-material/Explore';
 import { Button as MuiButton, ListItemText } from '@mui/material';
 import { AddAPhoto } from '@mui/icons-material';
@@ -132,14 +133,14 @@ export default function MiniDrawer() {
           <Link passHref href="/">
             <Navbar.Brand>CHANGE ME</Navbar.Brand>
           </Link>
-          <Form className="d-flex ms-auto searchBar">
+          <Form className="d-flex ms-auto searchBar searchBar">
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">Search</Button>
+            <Button variant="outline-dark"><SearchIcon /></Button>
           </Form>
           <Nav className="justify-content-end">
             <Nav.Item className="ms-auto">

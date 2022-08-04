@@ -24,3 +24,8 @@ body {
 .videoCallIcon {
   color: white;
 }
+
+.searchBar {
+  margin-right: 10px;
+  width: 30rem;
+}
