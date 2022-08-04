@@ -133,7 +133,7 @@ export default function MiniDrawer() {
           <Link passHref href="/">
             <Navbar.Brand>CHANGE ME</Navbar.Brand>
           </Link>
-          <Form className="d-flex ms-auto searchBar searchBar">
+          <Form className="d-flex ms-auto searchBar">
             <Form.Control
               type="search"
               placeholder="Search"

@@ -1,5 +1,5 @@
 {
-  "name": "YooTube",
+  "name": "yoo-tube",
   "private": true,
   "version": "1.0.0",
   "author": "HalloweenTown BlueLegs",
@@ -39,6 +39,7 @@
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.3.1",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-next": "11.1.2",
