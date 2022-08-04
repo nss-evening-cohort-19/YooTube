@@ -14,11 +14,10 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-// import ListItemText from '@mui/material/ListItemText';
-// import InboxIcon from '@mui/icons-material/MoveToInbox';
-// import MailIcon from '@mui/icons-material/Mail';
 import Link from 'next/link';
-import { Navbar, Nav, Button } from 'react-bootstrap';
+import {
+  Navbar, Nav, Button, Form,
+} from 'react-bootstrap';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
@@ -133,12 +132,23 @@ export default function MiniDrawer() {
           <Link passHref href="/">
             <Navbar.Brand>CHANGE ME</Navbar.Brand>
           </Link>
-          <Nav.Item>
-            { user ? <MuiButton><VideoCallIcon className="videoCallIcon" /></MuiButton> : <></>}
-          </Nav.Item>
-          <Nav.Item className="ms-auto">
-            { user ? <Button variant="danger" onClick={signOut}><LogoutIcon /></Button> : <Button variant="primary" onClick={signIn}><LoginIcon /></Button>}
-          </Nav.Item>
+          <Form className="d-flex ms-auto searchBar">
+            <Form.Control
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+            />
+            <Button variant="outline-success">Search</Button>
+          </Form>
+          <Nav className="justify-content-end">
+            <Nav.Item className="ms-auto">
+              { user ? <MuiButton><VideoCallIcon className="videoCallIcon" /></MuiButton> : <></>}
+            </Nav.Item>
+            <Nav.Item className="ms-auto">
+              { user ? <Button variant="danger" onClick={signOut}><LogoutIcon /></Button> : <Button variant="primary" onClick={signIn}><LoginIcon /></Button>}
+            </Nav.Item>
+          </Nav>
         </Toolbar>
       </AppBar>
 
