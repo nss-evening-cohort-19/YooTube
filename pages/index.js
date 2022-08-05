@@ -12,9 +12,7 @@ function Home() {
 
   const getAllPublicVideos = () => {
     getPublicVideos().then((theVideos) => {
-      console.warn(theVideos);
       setVideos(theVideos);
-      console.warn(videos);
     });
   };
 
@@ -26,7 +24,7 @@ function Home() {
     <div className="text-center my-4">
       <div className="d-flex flex-wrap">
         {videos?.map((video) => (
-          <VideoCard key={video.firebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getAllPublicVideos} />
+          <VideoCard key={video.videoFirebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getAllPublicVideos} />
         ))}
       </div>
 

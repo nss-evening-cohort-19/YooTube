@@ -169,7 +169,7 @@ export default function MiniDrawer() {
               { user
                 ? (
                   <div>
-                    <muiButton
+                    <MuiButton
                       id="demo-positioned-button"
                       aria-controls={openMenu ? 'demo-positioned-menu' : undefined}
                       aria-haspopup="true"
@@ -177,7 +177,7 @@ export default function MiniDrawer() {
                       onClick={handleClick}
                     >
                       <Avatar alt={user.displayName} src={user.photoURL} />
-                    </muiButton>
+                    </MuiButton>
                     <Menu
                       id="demo-positioned-menu"
                       aria-labelledby="demo-positioned-button"
@@ -193,12 +193,12 @@ export default function MiniDrawer() {
                         horizontal: 'center',
                       }}
                     >
-                      <MenuItem onClick={handleClose}><muiButton onClick={signOut}><LogoutIcon /> Sign Out</muiButton></MenuItem>
+                      <MenuItem onClick={handleClose}><MuiButton onClick={signOut}><LogoutIcon /> Sign Out</MuiButton></MenuItem>
                     </Menu>
                   </div>
                 )
                 : (
-                  <muiButton variant="primary" onClick={signIn}><LoginIcon className="drawerIcon" /></muiButton>
+                  <MuiButton variant="primary" onClick={signIn}><LoginIcon className="drawerIcon" /></MuiButton>
                 )}
             </Nav.Item>
           </Nav>
