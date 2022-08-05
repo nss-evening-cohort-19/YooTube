@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { createVideo, updateVideo } from '../../api/videoData';
+import getCategories from '../../api/categoryData';
 
 const initialState = {
   likes: 0,
@@ -14,13 +15,12 @@ const initialState = {
 
 function VideoForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
-  // eslint-disable-next-line no-unused-vars
   const [categories, setCategories] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
-    // getCategories().then(setCategories);
+    getCategories().then(setCategories);
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
 
@@ -104,8 +104,8 @@ function VideoForm({ obj }) {
             {
             categories.map((category) => (
               <option
-                key={category.firebaseKey}
-                value={category.firebaseKey}
+                key={category.categoryName}
+                value={category.categoryName}
               >
                 {category.categoryName}
               </option>
@@ -123,7 +123,7 @@ function VideoForm({ obj }) {
             onChange={(e) => {
               setFormInput((prevState) => ({
                 ...prevState,
-                public: e.target.checked,
+                isPublic: e.target.checked,
               }));
             }}
           />
