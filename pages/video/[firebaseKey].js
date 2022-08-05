@@ -7,19 +7,24 @@ import { getSingleVideo } from '../../api/videoData';
 
 function ViewVideo() {
   const [video, setVideo] = useState({});
+  // const [comments, setComments] = useState([]);
   const router = useRouter();
   const { firebaseKey } = router.query;
 
   const getTheVideo = () => {
     getSingleVideo(firebaseKey).then(setVideo);
   };
+  // const getTheComments = () => {
+  //   getComments().then(setComments);
+  // };
 
   useEffect(() => {
     getTheVideo();
+    // getTheComments();
   }, [video]);
 
   return (
-    <div>
+    <div className="">
       <div className="viewVideoDiv">
         <Card className="viewVideCard" style={{ width: '75%' }}>
           <YouTube opts={{ height: '390', width: '640' }} videoId={video.videoId} />
@@ -37,6 +42,9 @@ function ViewVideo() {
             </div>
           </Card.Body>
         </Card>
+      </div>
+      <div className="commentsDiv">
+        <h1>Comments Go Here</h1>
       </div>
     </div>
 
