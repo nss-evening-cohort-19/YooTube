@@ -1,5 +1,5 @@
 {
-  "name": "yootube",
+  "name": "yoo-tube",
   "private": true,
   "version": "1.0.0",
   "author": "HalloweenTown BlueLegs",
@@ -36,7 +36,8 @@
     "react-bootstrap": "^2.4.0",
     "react-bootstrap-sidebar-menu": "^2.0.1",
     "react-dom": "17.0.2",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "react-youtube": "^9.0.3"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
