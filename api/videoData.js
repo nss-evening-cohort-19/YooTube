@@ -3,6 +3,18 @@ import { clientCredentials } from '../utils/client';
 
 const dbUrl = clientCredentials.databaseURL;
 
+const getPublicVideos = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/videos.json?orderBy="isPublic"&equalTo=true`)
+    .then((response) => {
+      if (response.data) {
+        resolve(Object.values(response.data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch((error) => reject(error));
+});
+
 const getSingleVideo = (firebaseKey) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/videos/${firebaseKey}.json`)
     .then((response) => resolve(response.data))
@@ -39,5 +51,5 @@ const updateVideo = (videoObject) => new Promise((resolve, reject) => {
 });
 
 export {
-  createVideo, updateVideo, getVideos, getSingleVideo,
+  createVideo, updateVideo, getVideos, getSingleVideo, getPublicVideos,
 };
