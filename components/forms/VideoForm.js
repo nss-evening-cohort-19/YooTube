@@ -54,9 +54,9 @@ function VideoForm({ obj }) {
 
   return (
     <>
-      <h1>Add A Video</h1>
+      <h1>Add a Video</h1>
       <Form onSubmit={handleSubmit}>
-        <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Upload'} Video</h2>
+        <h2 className="text-black mt-5">{obj.firebaseKey ? 'Update' : 'Upload'} Video</h2>
 
         <FloatingLabel controlId="floatingInput1" label="Title" className="mb-3">
           <Form.Control
@@ -116,7 +116,7 @@ function VideoForm({ obj }) {
           <Form.Check
             className="text-black mb-3"
             type="switch"
-            id="public"
+            id="isPublic"
             name="isPublic"
             label="Public?"
             checked={formInput.isPublic}
