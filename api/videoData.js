@@ -18,7 +18,19 @@ const createVideo = (videoObj) => new Promise((resolve, reject) => {
     }).catch(reject);
 });
 
-const getVideos = (uid) => new Promise((resolve, reject) => {
+const getPublicVideos = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/videos.json?orderBy="isPublic"&equalTo=true`)
+    .then((response) => {
+      if (response.data) {
+        resolve(Object.values(response.data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
+const getUserVideos = (uid) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/videos.json?orderBy="uid"&equalTo="${uid}"`)
     .then((response) => {
       if (response.data) {
@@ -33,11 +45,11 @@ const getVideos = (uid) => new Promise((resolve, reject) => {
 const updateVideo = (videoObject) => new Promise((resolve, reject) => {
   axios.patch(`${dbUrl}/videos/${videoObject.firebaseKey}.json`, videoObject)
     .then(() => {
-      getVideos(videoObject.uid).then(resolve);
+      getUserVideos(videoObject.uid).then(resolve);
     })
     .catch(reject);
 });
 
 export {
-  createVideo, updateVideo, getVideos, getSingleVideo,
+  createVideo, updateVideo, getPublicVideos, getUserVideos, getSingleVideo,
 };
