@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { clientCredentials } from '../../utils/client';
+import { clientCredentials } from '../utils/client';
 
 const dbUrl = clientCredentials.databaseURL;
 
-const getPublicVideos = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/videos.json?orderBy="isPublic"&equalTo=true`)
+const getCategories = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/categories.json`)
     .then((response) => {
       if (response.data) {
         resolve(Object.values(response.data));
@@ -13,6 +13,6 @@ const getPublicVideos = () => new Promise((resolve, reject) => {
       }
     })
     .catch((error) => reject(error));
-})
+});
 
-export default getPublicVideos
+export default getCategories;
