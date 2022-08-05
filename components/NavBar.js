@@ -14,21 +14,25 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-// import ListItemText from '@mui/material/ListItemText';
-// import InboxIcon from '@mui/icons-material/MoveToInbox';
-// import MailIcon from '@mui/icons-material/Mail';
 import Link from 'next/link';
-import { Navbar, Nav, Button } from 'react-bootstrap';
+import {
+  Navbar, Nav, Button, Form,
+} from 'react-bootstrap';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import SearchIcon from '@mui/icons-material/Search';
 import ExploreIcon from '@mui/icons-material/Explore';
-import { Button as MuiButton, ListItemText } from '@mui/material';
+import {
+  Avatar, Button as MuiButton, ListItemText, Menu, MenuItem,
+} from '@mui/material';
 import { AddAPhoto } from '@mui/icons-material';
 import HomeIcon from '@mui/icons-material/Home';
+import Image from 'next/image';
+import svgicon from '../icons/icons8-youtube.svg';
 import { useAuth } from '../utils/context/authContext';
 import { signIn, signOut } from '../utils/auth';
 
@@ -112,11 +116,20 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openMenu = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
 
-      <AppBar position="fixed" open={open}>
+      <AppBar style={{ background: '#ffffff' }} position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -128,17 +141,67 @@ export default function MiniDrawer() {
               ...(open && { display: 'none' }),
             }}
           >
-            <MenuIcon />
+            <MenuIcon className="drawerIcon" />
           </IconButton>
           <Link passHref href="/">
-            <Navbar.Brand>CHANGE ME</Navbar.Brand>
+            <Navbar.Brand>
+              <Image src={svgicon} alt="youtube" />
+            </Navbar.Brand>
           </Link>
-          <Nav.Item>
-            { user ? <MuiButton><VideoCallIcon className="videoCallIcon" /></MuiButton> : <></>}
+          <Nav.Item className="searchBar ms-auto">
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+              />
+              <Button variant="outline-dark"><SearchIcon /></Button>
+            </Form>
           </Nav.Item>
-          <Nav.Item className="ms-auto">
-            { user ? <Button variant="danger" onClick={signOut}><LogoutIcon /></Button> : <Button variant="primary" onClick={signIn}><LoginIcon /></Button>}
-          </Nav.Item>
+          <Nav className="justify-content-end">
+            <Link passHref href="/video/new">
+              <Nav.Item className="d-flex">
+                { user ? <MuiButton><VideoCallIcon className="videoCallIcon" /></MuiButton> : <></>}
+              </Nav.Item>
+            </Link>
+            <Nav.Item className="d-flex">
+              { user
+                ? (
+                  <div>
+                    <MuiButton
+                      id="demo-positioned-button"
+                      aria-controls={openMenu ? 'demo-positioned-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={openMenu ? 'true' : undefined}
+                      onClick={handleClick}
+                    >
+                      <Avatar alt={user.displayName} src={user.photoURL} />
+                    </MuiButton>
+                    <Menu
+                      id="demo-positioned-menu"
+                      aria-labelledby="demo-positioned-button"
+                      anchorEl={anchorEl}
+                      open={openMenu}
+                      onClose={handleClose}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                      }}
+                    >
+                      <MenuItem onClick={handleClose}><MuiButton onClick={signOut}><LogoutIcon /> Sign Out</MuiButton></MenuItem>
+                    </Menu>
+                  </div>
+                )
+                : (
+                  <MuiButton variant="primary" onClick={signIn}><LoginIcon className="drawerIcon" /></MuiButton>
+                )}
+            </Nav.Item>
+          </Nav>
         </Toolbar>
       </AppBar>
 
@@ -152,24 +215,26 @@ export default function MiniDrawer() {
 
         <List>
           <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <Link passHref href="/">
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
                 }}
               >
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText sx={{ opacity: open ? 1 : 0 }}>Home</ListItemText>
-            </ListItemButton>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText sx={{ opacity: open ? 1 : 0 }}>Home</ListItemText>
+              </ListItemButton>
+            </Link>
           </ListItem>
           <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemButton
@@ -200,64 +265,70 @@ export default function MiniDrawer() {
             ? (
               <>
                 <ListItem disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                    sx={{
-                      minHeight: 48,
-                      justifyContent: open ? 'initial' : 'center',
-                      px: 2.5,
-                    }}
-                  >
-                    <ListItemIcon
+                  <Link passHref href="/video/new">
+                    <ListItemButton
                       sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : 'auto',
-                        justifyContent: 'center',
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
                       }}
                     >
-                      <AddAPhoto />
-                    </ListItemIcon>
-                    <ListItemText sx={{ opacity: open ? 1 : 0 }}>Upload</ListItemText>
-                  </ListItemButton>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <AddAPhoto />
+                      </ListItemIcon>
+                      <ListItemText sx={{ opacity: open ? 1 : 0 }}>Upload</ListItemText>
+                    </ListItemButton>
+                  </Link>
                 </ListItem>
                 <ListItem disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                    sx={{
-                      minHeight: 48,
-                      justifyContent: open ? 'initial' : 'center',
-                      px: 2.5,
-                    }}
-                  >
-                    <ListItemIcon
+                  <Link passHref href="/yourVideos">
+                    <ListItemButton
                       sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : 'auto',
-                        justifyContent: 'center',
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
                       }}
                     >
-                      <PlayCircleOutlineIcon />
-                    </ListItemIcon>
-                    <ListItemText sx={{ opacity: open ? 1 : 0 }}>Your Videos</ListItemText>
-                  </ListItemButton>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <PlayCircleOutlineIcon />
+                      </ListItemIcon>
+                      <ListItemText sx={{ opacity: open ? 1 : 0 }}>Your Videos</ListItemText>
+                    </ListItemButton>
+                  </Link>
                 </ListItem>
                 <ListItem disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                    sx={{
-                      minHeight: 48,
-                      justifyContent: open ? 'initial' : 'center',
-                      px: 2.5,
-                    }}
-                  >
-                    <ListItemIcon
+                  <Link passHref href="/likedVideos">
+                    <ListItemButton
                       sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : 'auto',
-                        justifyContent: 'center',
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
                       }}
                     >
-                      <ThumbUpOffAltIcon />
-                    </ListItemIcon>
-                    <ListItemText sx={{ opacity: open ? 1 : 0 }}>Liked Videos</ListItemText>
-                  </ListItemButton>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <ThumbUpOffAltIcon />
+                      </ListItemIcon>
+                      <ListItemText sx={{ opacity: open ? 1 : 0 }}>Liked Videos</ListItemText>
+                    </ListItemButton>
+                  </Link>
                 </ListItem>
               </>
             )
