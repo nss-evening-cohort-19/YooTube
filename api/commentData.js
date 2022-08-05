@@ -15,7 +15,7 @@ const updateComment = (commentObj) => new Promise((resolve, reject) => {
       getVideoComments(commentObj.videoFirebaseKey).then(resolve);
     })
     .catch(reject);
-})
+});
 
 const deleteComment = (commentfirebaseKey, videoFirebaseKey) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/comments/${commentfirebaseKey}.json`)
