@@ -50,6 +50,14 @@ const updateVideo = (videoObject) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const deleteSingleVideo = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/videos/${firebaseKey}.json`)
+    .then(() => {
+      getVideos(firebaseKey).then((videosArray) => resolve(videosArray));
+    })
+    .catch((error) => reject(error));
+});
+
 export {
-  createVideo, updateVideo, getVideos, getSingleVideo, getPublicVideos,
+  createVideo, updateVideo, getVideos, getSingleVideo, getPublicVideos, deleteSingleVideo,
 };

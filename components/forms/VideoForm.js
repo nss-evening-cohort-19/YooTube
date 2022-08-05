@@ -69,7 +69,7 @@ function VideoForm({ obj }) {
           />
         </FloatingLabel>
 
-        <FloatingLabel controlId="floatingInput2" label="Video URL" className="mb-3">
+        <FloatingLabel controlId="floatingInput2" label="Video URL (right-click video and copy video URL)" className="mb-3">
           <Form.Control
             type="text"
             placeholder="Enter Video URL"
