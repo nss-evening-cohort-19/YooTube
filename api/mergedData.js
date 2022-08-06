@@ -1,11 +1,13 @@
-// import axios from 'axios';
-// import { clientCredentials } from '../utils/client';
+/* eslint-disable import/prefer-default-export */
+import { getVideoComments } from './commentData';
+import { getSingleVideo } from './videoData';
 
-// const dbUrl = clientCredentials.databaseURL;
+const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
+  getSingleVideo(firebaseKey).then((videoObj) => {
+    getVideoComments(firebaseKey).then((videoCommentsArr) => {
+      resolve({ ...videoObj, comments: videoCommentsArr });
+    });
+  }).catch(reject);
+});
 
-// const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
-//   axios.get(`${dbUrl}/videos/${firebaseKey}`)
-//     .then((videoObj) => {
-//       axios.get(`${dbUrl}/comments`)
-//     })
-// })
+export { getVideoAndComments };

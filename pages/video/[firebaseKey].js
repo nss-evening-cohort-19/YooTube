@@ -3,25 +3,21 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import YouTube from 'react-youtube';
 import { Card, Button, Image } from 'react-bootstrap';
-import { getSingleVideo } from '../../api/videoData';
-// import CommentCard from '../../components/CommentCard';
+import { getVideoAndComments } from '../../api/mergedData';
+import CommentCard from '../../components/CommentCard';
 
 function ViewVideo() {
   const [video, setVideo] = useState({});
-  // const [comments, setComments] = useState([]);
   const router = useRouter();
   const { firebaseKey } = router.query;
 
   const getTheVideo = () => {
-    getSingleVideo(firebaseKey).then(setVideo);
+    getVideoAndComments(firebaseKey).then(setVideo);
+    console.warn(video);
   };
-  // const getTheComments = () => {
-  //   getComments().then(setComments);
-  // };
 
   useEffect(() => {
     getTheVideo();
-    // getTheComments();
   }, [video]);
 
   return (
@@ -29,10 +25,11 @@ function ViewVideo() {
       <div className="viewVideoDiv">
         <Card className="viewVideCard" style={{ width: '75%' }}>
           <YouTube opts={{ height: '390', width: '640' }} videoId={video.videoId} />
-          <Card.Body>
+          <Card.Body className="videoBody">
             <div className="videoTextdiv">
-              <Image className="vidCardCreatorImage" src={video.creatorImage} />
               <Card.Title className="vidTitle">{video.title}</Card.Title>
+              <Card.Text className="videoDescription">{video.description}</Card.Text>
+              <Image className="vidCardCreatorImage" src={video.creatorImage} />
               <Card.Text className="vidCreatorName">{video.creatorName}</Card.Text>
               <Card.Text className="vidDate">{video.date}</Card.Text>
             </div>
@@ -45,14 +42,13 @@ function ViewVideo() {
         </Card>
       </div>
       <div className="commentsDiv">
-        {/* {
-        comments.map((comment) => (
+        {
+        video.comments?.map((comment) => (
           <CommentCard commentObj={comment} key={comment.commentfirebaseKey} />
         ))
-        }; */}
+        }
       </div>
     </div>
-
   );
 }
 export default ViewVideo;

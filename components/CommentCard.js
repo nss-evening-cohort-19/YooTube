@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import { Card, Image } from 'react-bootstrap/Card';
+import { Card, Image } from 'react-bootstrap';
 
 function CommentCard({ commentObj }) {
   return (
     <Card style={{ width: '36rem' }}>
-      <Image src={commentObj.photoURL} />
+      <Image className="vidCardCreatorImage" src={commentObj.photoURL} />
       <Card.Body>
         <Card.Text>{ commentObj.displayName }</Card.Text>
         <Card.Text>{ commentObj.commentText }</Card.Text>
