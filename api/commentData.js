@@ -17,12 +17,12 @@ const updateComment = (commentObj) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const deleteComment = (commentfirebaseKey, videoFirebaseKey) => new Promise((resolve, reject) => {
+const deleteComment = (commentfirebaseKey) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/comments/${commentfirebaseKey}.json`)
     .then(() => {
-      getVideoComments(videoFirebaseKey).then(resolve);
+      getVideoComments().then((commentsArray) => resolve(commentsArray));
     })
-    .catch(reject);
+    .catch((error) => reject(error));
 });
 
 export { getVideoComments, updateComment, deleteComment };
