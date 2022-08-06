@@ -1,14 +1,19 @@
 /* eslint-disable react/void-dom-elements-no-children */
 import { React } from 'react';
-import { Card, Image, Button } from 'react-bootstrap';
+import { Card, Image } from 'react-bootstrap';
 import YouTube from 'react-youtube';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import IconButton from '@mui/material/IconButton';
+
 import { deleteSingleVideo } from '../api/videoData';
 
 // eslint-disable-next-line react/prop-types
 function VideoCard({
-  obj, opts, onUpdate, user,
+  obj, opts, onUpdate, router,
 }) {
   const deleteThisVideo = () => {
     if (window.confirm('Delete This Video?')) {
@@ -28,19 +33,21 @@ function VideoCard({
             <Card.Text className="vidCardCreatorName">{obj.creatorName}</Card.Text>
             <Card.Text className="vidCardLikes">Likes: {obj.likes}</Card.Text>
           </div>
-          {obj.uid === user.uid ? (
-            <>
-              <Link href={`/video/edit/${obj.videoFirebaseKey}`} passHref>
-                <Button variant="outline-secondary">EDIT</Button>
-              </Link>
-              <Button variant="outline-danger" onClick={deleteThisVideo} className="m-2">
-                DELETE
-              </Button>
-            </>
-          ) : (
-            <div />
-          )}
         </Card.Body>
+        {router === 'yourVideos' ? (
+          <div className="card-buttons">
+            <Link href={`/video/edit/${obj.videoFirebaseKey}`} passHref>
+              <IconButton aria-label="delete" className="edit-btn">
+                <EditIcon style={{ color: 'white' }} />
+              </IconButton>
+            </Link>
+            <IconButton aria-label="delete" className="delete-btn " onClick={deleteThisVideo}>
+              <DeleteIcon style={{ color: 'white' }} />
+            </IconButton>
+          </div>
+        ) : (
+          <div />
+        )}
       </Card>
     </div>
   );
@@ -66,7 +73,8 @@ VideoCard.propTypes = {
     uid: PropTypes.string.isRequired,
   }).isRequired,
   opts: PropTypes.shape({
-
+  }).isRequired,
+  router: PropTypes.shape({
   }).isRequired,
 };
 
