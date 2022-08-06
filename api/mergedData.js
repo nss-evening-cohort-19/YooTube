@@ -1,5 +1,5 @@
 import { deleteComment, getVideoComments } from './commentData';
-import { deleteSingleVideo } from './videoData';
+import { deleteSingleVideo, getSingleVideo } from './videoData';
 
 const deleteVideoComments = (videoFirebaseKey) => new Promise((resolve, reject) => {
   getVideoComments(videoFirebaseKey).then((commentsArray) => {
@@ -12,5 +12,12 @@ const deleteVideoComments = (videoFirebaseKey) => new Promise((resolve, reject) 
   }).catch((error) => reject(error));
 });
 
-// eslint-disable-next-line import/prefer-default-export
-export { deleteVideoComments };
+const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
+  getSingleVideo(firebaseKey).then((videoObj) => {
+    getVideoComments(firebaseKey).then((videoCommentsArr) => {
+      resolve({ ...videoObj, comments: videoCommentsArr });
+    });
+  }).catch(reject);
+});
+
+export { getVideoAndComments, deleteVideoComments };
