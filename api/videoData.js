@@ -14,6 +14,14 @@ const getPublicVideos = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const getPublicVideosbyCategory = (category) => new Promise((resolve, reject) => {
+  getPublicVideos().then((publicVideos) => {
+    const filteredPublicVideos = publicVideos.filter((publicVideo) => publicVideo.category === category);
+    resolve(filteredPublicVideos);
+  })
+    .catch((error) => reject(error));
+});
+
 const getSingleVideo = (firebaseKey) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/videos/${firebaseKey}.json`)
     .then((response) => resolve(response.data))
@@ -58,5 +66,5 @@ const deleteSingleVideo = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 export {
-  createVideo, updateVideo, getVideos, getSingleVideo, getPublicVideos, deleteSingleVideo,
+  createVideo, updateVideo, getVideos, getSingleVideo, getPublicVideos, deleteSingleVideo, getPublicVideosbyCategory,
 };
