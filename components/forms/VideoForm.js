@@ -48,7 +48,7 @@ function VideoForm({ obj }) {
       const payload = {
         ...formInput, uid: user.uid, date: date(), creatorName: user.displayName, creatorImage: user.photoURL, videoId: formInput.videoURL.slice(lastIndex + 1),
       };
-      createVideo(payload).then(() => router.push('/index'));
+      createVideo(payload).then(() => router.push('/yourVideos'));
     }
   };
 

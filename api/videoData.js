@@ -43,7 +43,7 @@ const getVideos = (uid) => new Promise((resolve, reject) => {
 });
 
 const updateVideo = (videoObject) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/videos/${videoObject.firebaseKey}.json`, videoObject)
+  axios.patch(`${dbUrl}/videos/${videoObject.videoFirebaseKey}.json`, videoObject)
     .then(() => {
       getVideos(videoObject.uid).then(resolve);
     })
