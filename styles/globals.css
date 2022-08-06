@@ -56,5 +56,25 @@ body {
   flex-direction: column;
 }
 .videoCallIcon {
-  color: white;
+  color: black;
+}
+
+.searchBar {
+  margin-right: 10px;
+  width: 30rem;
+  justify-content: center;
+}
+
+.drawerIcon {
+  color: black;
+}
+
+.container {
+  margin-top: 100px;
+}
+
+.studio {
+  display: flex;
+  flex-direction: row;
+
 }

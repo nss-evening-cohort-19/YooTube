@@ -1,0 +1,29 @@
+{
+  "travel": {
+    "categoryName": "travel"
+  },
+  "comedy": {
+    "categoryName": "comedy"
+  },
+  "music": {
+    "categoryName": "music"
+  },
+  "food": {
+    "categoryName": "food"
+  },
+  "entertainment": {
+    "categoryName": "entertainment"
+  },
+  "education": {
+    "categoryName": "education"
+  },
+  "movies": {
+    "categoryName": "movies"
+  },
+  "television": {
+    "categoryName": "television"
+  },
+  "sports": {
+    "categoryName": "sports"
+  }
+}

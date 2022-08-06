@@ -40,6 +40,7 @@
     "react-youtube": "^9.0.3"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.3.1",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-next": "11.1.2",
