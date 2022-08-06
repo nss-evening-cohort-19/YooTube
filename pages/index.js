@@ -2,7 +2,6 @@
 // import Link from 'next/link';
 import { Chip, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
-// import { Button } from 'react-bootstrap';
 import { getPublicVideos, getPublicVideosbyCategory } from '../api/videoData';
 import VideoCard from '../components/videoCard';
 import { useAuth } from '../utils/context/authContext';
@@ -10,7 +9,6 @@ import { useAuth } from '../utils/context/authContext';
 function Home() {
   const { user } = useAuth();
   const [videos, setVideos] = useState();
-  // const [label, setLabel] = useState();
 
   const getAllPublicVideos = () => {
     getPublicVideos().then((theVideos) => {
@@ -39,15 +37,15 @@ function Home() {
     <>
       <div>
         <Stack direction="row" spacing={1}>
-          <Chip label="comedy" value="comedy" variant="outlined" onClick={handleClick} />
-          <Chip label="education" value="education" variant="outlined" onClick={handleClick} />
-          <Chip label="entertainment" value="entertainment" variant="outlined" onClick={handleClick} />
-          <Chip label="food" value="food" variant="outlined" onClick={handleClick} />
-          <Chip label="movies" value="movies" variant="outlined" onClick={handleClick} />
-          <Chip label="music" value="music" variant="outlined" onClick={handleClick} />
-          <Chip label="sports" value="sports" variant="outlined" onClick={handleClick} />
-          <Chip label="television" value="television" variant="outlined" onClick={handleClick} />
-          <Chip label="travel" value="travel" variant="outlined" onClick={handleClick} />
+          <Chip label="comedy" variant="outlined" onClick={handleClick} />
+          <Chip label="education" variant="outlined" onClick={handleClick} />
+          <Chip label="entertainment" variant="outlined" onClick={handleClick} />
+          <Chip label="food" variant="outlined" onClick={handleClick} />
+          <Chip label="movies" variant="outlined" onClick={handleClick} />
+          <Chip label="music" variant="outlined" onClick={handleClick} />
+          <Chip label="sports" variant="outlined" onClick={handleClick} />
+          <Chip label="television" variant="outlined" onClick={handleClick} />
+          <Chip label="travel" variant="outlined" onClick={handleClick} />
           <Chip label="all" variant="outlined" onClick={handleClick} />
         </Stack>
       </div>
