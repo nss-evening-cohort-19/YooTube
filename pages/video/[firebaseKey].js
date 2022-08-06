@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import YouTube from 'react-youtube';
 import { Card, Button, Image } from 'react-bootstrap';
 import { getSingleVideo } from '../../api/videoData';
+// import CommentCard from '../../components/CommentCard';
 
 function ViewVideo() {
   const [video, setVideo] = useState({});
@@ -44,7 +45,11 @@ function ViewVideo() {
         </Card>
       </div>
       <div className="commentsDiv">
-        <h1>Comments Go Here</h1>
+        {/* {
+        comments.map((comment) => (
+          <CommentCard commentObj={comment} key={comment.commentfirebaseKey} />
+        ))
+        }; */}
       </div>
     </div>
 
