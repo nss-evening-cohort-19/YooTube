@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../utils/context/authContext';
-import { getVideos } from '../api/videoData';
+import { getUserVideos } from '../api/videoData';
 import VideoCard from '../components/videoCard';
 import logo from '../components/images/studio.jpg';
 import ProfileCard from '../components/ProfileCard';
@@ -13,7 +13,7 @@ function YourVideos() {
   const { user } = useAuth();
 
   const getYourVideos = () => {
-    getVideos(user.uid).then(setVideos);
+    getUserVideos(user.uid).then(setVideos);
   };
 
   useEffect(() => {
