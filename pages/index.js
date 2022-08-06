@@ -2,7 +2,7 @@
 // import Link from 'next/link';
 import { useEffect, useState } from 'react';
 // import { Button } from 'react-bootstrap';
-import getPublicVideos from '../api/videoData';
+import { getPublicVideos } from '../api/videoData';
 import VideoCard from '../components/videoCard';
 // import { useAuth } from '../utils/context/authContext';
 
@@ -21,14 +21,16 @@ function Home() {
   }, []);
 
   return (
-    <div className="text-center my-4">
-      <div className="d-flex flex-wrap">
-        {videos?.map((video) => (
-          <VideoCard key={video.videoFirebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getAllPublicVideos} />
-        ))}
-      </div>
+    <>
+      <div className="text-center my-4">
+        <div className="d-flex flex-wrap">
+          {videos?.map((video) => (
+            <VideoCard key={video.videoFirebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getAllPublicVideos} />
+          ))}
+        </div>
 
-    </div>
+      </div>
+    </>
   );
 }
 

@@ -11,8 +11,7 @@ const getPublicVideos = () => new Promise((resolve, reject) => {
       } else {
         resolve([]);
       }
-    })
-    .catch((error) => reject(error));
+    }).catch((error) => reject(error));
 });
 
 const getSingleVideo = (firebaseKey) => new Promise((resolve, reject) => {
