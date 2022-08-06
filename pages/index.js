@@ -2,7 +2,7 @@
 // import Link from 'next/link';
 import { useEffect, useState } from 'react';
 // import { Button } from 'react-bootstrap';
-import getPublicVideos from '../api/videoData';
+import { getPublicVideos } from '../api/videoData';
 import VideoCard from '../components/videoCard';
 // import { useAuth } from '../utils/context/authContext';
 
