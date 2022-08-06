@@ -21,8 +21,8 @@ function VideoForm({ obj }) {
 
   useEffect(() => {
     getCategories().then(setCategories);
-    if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user]);
+    if (obj.videoFirebaseKey) setFormInput(obj);
+  }, [obj]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +40,7 @@ function VideoForm({ obj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.firebaseKey) {
+    if (obj.videoFirebaseKey) {
       updateVideo(formInput)
         .then(() => router.push('/yourVideos'));
     } else {
@@ -56,7 +56,7 @@ function VideoForm({ obj }) {
     <>
       <h1>Add a Video</h1>
       <Form onSubmit={handleSubmit}>
-        <h2 className="text-black mt-5">{obj.firebaseKey ? 'Update' : 'Upload'} Video</h2>
+        <h2 className="text-black mt-5">{obj.videoFirebaseKey ? 'Update' : 'Upload'} Video</h2>
 
         <FloatingLabel controlId="floatingInput1" label="Title" className="mb-3">
           <Form.Control
@@ -69,7 +69,7 @@ function VideoForm({ obj }) {
           />
         </FloatingLabel>
 
-        <FloatingLabel controlId="floatingInput2" label="Video URL" className="mb-3">
+        <FloatingLabel controlId="floatingInput2" label="Video URL (right-click video and copy video URL)" className="mb-3">
           <Form.Control
             type="text"
             placeholder="Enter Video URL"
@@ -129,7 +129,7 @@ function VideoForm({ obj }) {
           />
         </FloatingLabel>
 
-        <Button type="submit">{obj.firebaseKey ? 'Update' : 'Upload'} Video</Button>
+        <Button type="submit">{obj.videoFirebaseKey ? 'Update' : 'Upload'} Video</Button>
       </Form>
     </>
 
@@ -141,6 +141,7 @@ VideoForm.propTypes = {
     image: PropTypes.string,
     name: PropTypes.string,
     position: PropTypes.string,
+    videoFirebaseKey: PropTypes.string,
     firebaseKey: PropTypes.string,
     teamId: PropTypes.string,
     category: PropTypes.string,
