@@ -73,7 +73,8 @@ body {
   margin-top: 100px;
 }
 
-.card-buttons {
+.studio {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+
 }

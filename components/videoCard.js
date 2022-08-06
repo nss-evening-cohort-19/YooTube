@@ -34,7 +34,7 @@ function VideoCard({
             <Card.Text className="vidCardLikes">Likes: {obj.likes}</Card.Text>
           </div>
         </Card.Body>
-        {router === 'yourVideos' ? (
+        {router === '/yourVideos' ? (
           <div className="card-buttons">
             <Link href={`/video/edit/${obj.videoFirebaseKey}`} passHref>
               <IconButton aria-label="delete" className="edit-btn">
