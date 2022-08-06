@@ -42,13 +42,21 @@ const getVideos = (uid) => new Promise((resolve, reject) => {
 });
 
 const updateVideo = (videoObject) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/videos/${videoObject.firebaseKey}.json`, videoObject)
+  axios.patch(`${dbUrl}/videos/${videoObject.videoFirebaseKey}.json`, videoObject)
     .then(() => {
       getVideos(videoObject.uid).then(resolve);
     })
     .catch(reject);
 });
 
+const deleteSingleVideo = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/videos/${firebaseKey}.json`)
+    .then(() => {
+      getVideos(firebaseKey).then((videosArray) => resolve(videosArray));
+    })
+    .catch((error) => reject(error));
+});
+
 export {
-  createVideo, updateVideo, getVideos, getSingleVideo, getPublicVideos,
+  createVideo, updateVideo, getVideos, getSingleVideo, getPublicVideos, deleteSingleVideo,
 };
