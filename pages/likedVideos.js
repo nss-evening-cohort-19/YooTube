@@ -20,11 +20,17 @@ function Home() {
 
   return (
     <div className="text-center my-4">
-      <div className="d-flex flex-wrap">
-        {videos?.map((video) => (
-          <VideoCard key={video.videoFirebaseKey} obj={video} user={user} opts={{ height: '160', width: '280' }} onUpdate={getLikedVideos} />
-        ))}
-      </div>
+      {user.uid ? (
+        <div className="d-flex flex-wrap">
+          {videos?.map((video) => (
+            <VideoCard key={video.videoFirebaseKey} obj={video} user={user} opts={{ height: '160', width: '280' }} onUpdate={getLikedVideos} />
+          ))}
+        </div>
+      ) : (
+        <div>
+          <h1>Sign in to see Liked Videos</h1>
+        </div>
+      )}
 
     </div>
   );
