@@ -20,6 +20,7 @@ function VideoCard({
       deleteSingleVideo(obj.videoFirebaseKey).then(() => onUpdate());
     }
   };
+
   return (
     <div>
       <Card className="videoCard">
@@ -31,13 +32,12 @@ function VideoCard({
               <Card.Title className="vidCardTitle">{obj.title}</Card.Title>
             </Link>
             <Card.Text className="vidCardCreatorName">{obj.creatorName}</Card.Text>
-            <Card.Text className="vidCardLikes">Likes: {obj.likes}</Card.Text>
           </div>
         </Card.Body>
         {router === '/yourVideos' ? (
           <div className="card-buttons">
             <Link href={`/video/edit/${obj.videoFirebaseKey}`} passHref>
-              <IconButton aria-label="delete" className="edit-btn">
+              <IconButton aria-label="edit" className="edit-btn">
                 <EditIcon style={{ color: 'white' }} />
               </IconButton>
             </Link>
@@ -59,7 +59,6 @@ VideoCard.propTypes = {
     title: PropTypes.string,
     videoId: PropTypes.string,
     videoURL: PropTypes.string,
-    likes: PropTypes.number,
     description: PropTypes.string,
     date: PropTypes.string,
     category: PropTypes.string,
@@ -69,13 +68,16 @@ VideoCard.propTypes = {
     uid: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
-  user: PropTypes.shape({
+  /* user: PropTypes.shape({
     uid: PropTypes.string.isRequired,
-  }).isRequired,
+  }).isRequired, */
   opts: PropTypes.shape({
   }).isRequired,
-  router: PropTypes.shape({
-  }).isRequired,
+  router: PropTypes.string,
+};
+
+VideoCard.defaultProps = {
+  router: '',
 };
 
 export default VideoCard;
