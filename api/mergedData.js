@@ -1,5 +1,23 @@
-import { deleteComment, getVideoComments } from './commentData';
+/* eslint-disable import/prefer-default-export */
+import { getVideoComments, deleteComment } from './commentData';
 import { deleteSingleVideo, getSingleVideo } from './videoData';
+import { getLikesByUser } from './likeData';
+
+const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
+  getSingleVideo(firebaseKey).then((videoObj) => {
+    getVideoComments(firebaseKey).then((videoCommentsArr) => {
+      resolve({ ...videoObj, comments: videoCommentsArr });
+    });
+  }).catch(reject);
+});
+
+const getUsersLikedVideos = async (uid) => {
+  const userLikes = await getLikesByUser(uid);
+  const likedVideos = userLikes.map((like) => like.videoFirebaseKey);
+  const videoObjects = await likedVideos.map((firebaseKey) => getSingleVideo(firebaseKey));
+  const videoObjectArray = await Promise.all(videoObjects);
+  return videoObjectArray;
+};
 
 const deleteVideoComments = (videoFirebaseKey) => new Promise((resolve, reject) => {
   getVideoComments(videoFirebaseKey).then((commentsArray) => {
@@ -12,12 +30,4 @@ const deleteVideoComments = (videoFirebaseKey) => new Promise((resolve, reject) 
   }).catch((error) => reject(error));
 });
 
-const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
-  getSingleVideo(firebaseKey).then((videoObj) => {
-    getVideoComments(firebaseKey).then((videoCommentsArr) => {
-      resolve({ ...videoObj, comments: videoCommentsArr });
-    });
-  }).catch(reject);
-});
-
-export { getVideoAndComments, deleteVideoComments };
+export { getVideoAndComments, getUsersLikedVideos, deleteVideoComments };
