@@ -6,7 +6,7 @@ function ProfileCard() {
 
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
+      <Card.Img variant="top" src={user.photoURL} />
       <Card.Body>
         <Card.Title>{user.displayName}</Card.Title>
         <Card.Text>
