@@ -16,7 +16,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Link from 'next/link';
 import {
-  Navbar, Nav, Button, Form,
+  Navbar, Nav,
 } from 'react-bootstrap';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -24,7 +24,6 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import SearchIcon from '@mui/icons-material/Search';
 import ExploreIcon from '@mui/icons-material/Explore';
 import {
   Avatar, Button as MuiButton, ListItemText, Menu, MenuItem,
@@ -35,6 +34,7 @@ import Image from 'next/image';
 import svgicon from '../icons/icons8-youtube.svg';
 import { useAuth } from '../utils/context/authContext';
 import { signIn, signOut } from '../utils/auth';
+import SearchBar from './SearchBar';
 
 const drawerWidth = 240;
 
@@ -148,17 +148,7 @@ export default function MiniDrawer() {
               <Image src={svgicon} alt="youtube" />
             </Navbar.Brand>
           </Link>
-          <Nav.Item className="searchBar ms-auto">
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-dark"><SearchIcon /></Button>
-            </Form>
-          </Nav.Item>
+          <SearchBar />
           <Nav className="justify-content-end">
             <Link passHref href="/video/new">
               <Nav.Item className="d-flex">
