@@ -9,15 +9,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import IconButton from '@mui/material/IconButton';
 
-import { deleteSingleVideo } from '../api/videoData';
+import { getVideoComments } from '../api/commentData';
+import { deleteVideoComments } from '../api/mergedData';
 
 // eslint-disable-next-line react/prop-types
 function VideoCard({
   obj, opts, onUpdate, router,
 }) {
   const deleteThisVideo = () => {
-    if (window.confirm('Delete This Video?')) {
-      deleteSingleVideo(obj.videoFirebaseKey).then(() => onUpdate());
+    if (window.confirm('Delete this video?')) {
+      getVideoComments(obj.videoFirebaseKey).then(() => {
+        deleteVideoComments(obj.videoFirebaseKey).then(() => onUpdate());
+      });
     }
   };
 

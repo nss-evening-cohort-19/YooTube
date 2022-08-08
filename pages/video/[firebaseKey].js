@@ -12,6 +12,7 @@ import { getVideoAndComments } from '../../api/mergedData';
 import CommentCard from '../../components/CommentCard';
 import { useAuth } from '../../utils/context/authContext';
 import { createLike, deleteSingleLike, getVideoLikes } from '../../api/likeData';
+import CommentForm from '../../components/forms/CommentForm';
 
 function ViewVideo() {
   const [video, setVideo] = useState({});
@@ -67,6 +68,9 @@ function ViewVideo() {
             </div>
           </Card.Body>
         </Card>
+      </div>
+      <div className="addComment">
+        <CommentForm videoFirebaseKey={video.videoFirebaseKey} />
       </div>
       <div className="commentsDiv">
         {
