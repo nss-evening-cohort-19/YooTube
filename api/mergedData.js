@@ -1,6 +1,16 @@
-/* eslint-disable import/prefer-default-export */
-import { getVideoComments } from './commentData';
-import { getSingleVideo } from './videoData';
+import { deleteComment, getVideoComments } from './commentData';
+import { deleteSingleVideo, getSingleVideo } from './videoData';
+
+const deleteVideoComments = (videoFirebaseKey) => new Promise((resolve, reject) => {
+  getVideoComments(videoFirebaseKey).then((commentsArray) => {
+    console.warn(commentsArray);
+    const deleteCommentPromises = commentsArray.map((comment) => deleteComment(comment.commentFirebaseKey));
+
+    Promise.all(deleteCommentPromises).then(() => {
+      deleteSingleVideo(videoFirebaseKey).then(resolve);
+    });
+  }).catch((error) => reject(error));
+});
 
 const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleVideo(firebaseKey).then((videoObj) => {
@@ -10,4 +20,4 @@ const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
   }).catch(reject);
 });
 
-export { getVideoAndComments };
+export { getVideoAndComments, deleteVideoComments };
