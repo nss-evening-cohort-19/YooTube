@@ -5,7 +5,7 @@ const dbUrl = clientCredentials.databaseURL;
 
 const getUserHistory = (uid) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/users/${uid}.json`)
-    .then((reponse) => resolve(reponse.history))
+    .then((reponse) => resolve(reponse.data.history))
     .catch((reject));
 });
 
