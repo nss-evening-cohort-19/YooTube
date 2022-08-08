@@ -3,22 +3,31 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import YouTube from 'react-youtube';
 import { Card, Button, Image } from 'react-bootstrap';
-import { getVideoAndComments } from '../../api/mergedData';
+import { addToUserHistory, getVideoAndComments } from '../../api/mergedData';
 import CommentCard from '../../components/CommentCard';
+import { useAuth } from '../../utils/context/authContext';
 
 function ViewVideo() {
-  const [video, setVideo] = useState({});
+  const { user } = useAuth();
   const router = useRouter();
   const { firebaseKey } = router.query;
+  const [video, setVideo] = useState({});
 
   const getTheVideo = () => {
     getVideoAndComments(firebaseKey).then(setVideo);
-    console.warn(video);
   };
 
   useEffect(() => {
     getTheVideo();
   }, [video]);
+
+  const addVideoToUserHistory = () => {
+    addToUserHistory(user.uid, firebaseKey);
+  };
+
+  useEffect(() => {
+    addVideoToUserHistory();
+  }, []);
 
   return (
     <div className="">

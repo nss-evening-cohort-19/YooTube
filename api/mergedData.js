@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { getVideoComments } from './commentData';
+import { getUser, updateUser } from './userData';
 import { getSingleVideo } from './videoData';
 
 const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
@@ -10,4 +11,15 @@ const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
   }).catch(reject);
 });
 
-export { getVideoAndComments };
+const addToUserHistory = (uid, videoFirebaseKey) => new Promise((resolve, reject) => {
+  getUser(uid).then((userObj) => {
+    console.warn(userObj);
+    // eslint-disable-next-line prefer-destructuring
+    const history = userObj.history;
+    const update = [videoFirebaseKey, ...history];
+    const updatedUser = { ...userObj, history: update };
+    updateUser(uid, updatedUser).then(resolve);
+  }).catch(reject);
+});
+
+export { getVideoAndComments, addToUserHistory };
