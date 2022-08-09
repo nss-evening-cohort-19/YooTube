@@ -6,13 +6,16 @@ import IconButton from '@mui/material/IconButton';
 import { deleteComment, getVideoComments } from '../api/commentData';
 import { useAuth } from '../utils/context/authContext';
 
-function CommentCard({ commentObj, onUpdate }) {
+function CommentCard({ commentObj, onUpdate, setCommentToUpdate }) {
   const deleteThisComment = () => {
     if (window.confirm('Delete this comment?')) {
       getVideoComments(commentObj.videoFirebaseKey).then(() => {
         deleteComment(commentObj.commentFirebaseKey).then(() => onUpdate());
       });
     }
+  };
+  const scroll = () => {
+    window.scrollTo(0, 0);
   };
 
   const { user } = useAuth();
@@ -26,7 +29,14 @@ function CommentCard({ commentObj, onUpdate }) {
       </Card.Body>
       { user.uid === commentObj.uid ? (
         <div>
-          <IconButton aria-label="edit" className="edit-btn">
+          <IconButton
+            aria-label="edit"
+            className="edit-btn"
+            onClick={() => {
+              setCommentToUpdate(commentObj);
+              scroll();
+            }}
+          >
             <EditIcon style={{ color: 'blue' }} />
           </IconButton>
           <IconButton aria-label="delete" className="delete-btn " onClick={deleteThisComment}>
@@ -50,6 +60,7 @@ CommentCard.propTypes = {
     uid: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
+  setCommentToUpdate: PropTypes.func.isRequired,
 };
 
 export default CommentCard;
