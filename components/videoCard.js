@@ -24,6 +24,36 @@ function VideoCard({
     }
   };
 
+  const timeDifference = () => {
+    const diff = Math.abs(new Date() - new Date(obj.date.replace(/-/g, '/')));
+    if (diff / 1000 < 60) {
+      return `${Math.round(diff / 1000)} Seconds Ago`;
+    } if (diff / (1000 * 60) < 60) {
+      if ((diff / (1000 * 60) < 2)) {
+        return `${Math.round(diff / (1000 * 60))} Minute Ago`;
+      }
+      return `${Math.round(diff / (1000 * 60))} Minutes Ago`;
+    } if (diff / (1000 * 60 * 60) < 60) {
+      if ((diff / (1000 * 60 * 60) < 2)) {
+        return `${Math.round(diff / (1000 * 60 * 60))} Hour Ago`;
+      }
+      return `${Math.round(diff / (1000 * 60 * 60))} Hours Ago`;
+    } if (diff / (1000 * 60 * 60 * 24) < 7) {
+      if ((diff / (1000 * 60 * 60 * 24) < 2)) {
+        return `${Math.round(diff / (1000 * 60 * 60 * 24))} Day Ago`;
+      }
+      return `${Math.round(diff / (1000 * 60 * 60 * 24))} Days Ago`;
+    } if (diff / (1000 * 60 * 60 * 24 * 7) < 7) {
+      if ((diff / (1000 * 60 * 60 * 24 * 7) < 2)) {
+        return `${Math.round(diff / (1000 * 60 * 60 * 24 * 7))} Week Ago`;
+      }
+      return `${Math.round(diff / (1000 * 60 * 60 * 24 * 7))} Weeks Ago`;
+    }
+    return 'Recently';
+  };
+
+  const uploadstatement = timeDifference();
+
   return (
     <div>
       <Card className="videoCard">
@@ -35,22 +65,23 @@ function VideoCard({
               <Card.Title className="vidCardTitle">{obj.title}</Card.Title>
             </Link>
             <Card.Text className="vidCardCreatorName">{obj.creatorName}</Card.Text>
+            <Card.Text className="uploaded">• {uploadstatement}</Card.Text>
           </div>
-        </Card.Body>
-        {router === '/yourVideos' ? (
-          <div className="card-buttons">
-            <Link href={`/video/edit/${obj.videoFirebaseKey}`} passHref>
-              <IconButton aria-label="edit" className="edit-btn">
-                <EditIcon style={{ color: 'white' }} />
+          {router === '/yourVideos' ? (
+            <div className="card-buttons">
+              <Link href={`/video/edit/${obj.videoFirebaseKey}`} passHref>
+                <IconButton aria-label="edit" className="edit-btn">
+                  <EditIcon style={{ color: 'white' }} />
+                </IconButton>
+              </Link>
+              <IconButton aria-label="delete" className="delete-btn " onClick={deleteThisVideo}>
+                <DeleteIcon style={{ color: 'white' }} />
               </IconButton>
-            </Link>
-            <IconButton aria-label="delete" className="delete-btn " onClick={deleteThisVideo}>
-              <DeleteIcon style={{ color: 'white' }} />
-            </IconButton>
-          </div>
-        ) : (
-          <div />
-        )}
+            </div>
+          ) : (
+            <div />
+          )}
+        </Card.Body>
       </Card>
     </div>
   );
