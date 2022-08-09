@@ -1,4 +1,5 @@
 import * as React from 'react';
+// import { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -107,6 +108,8 @@ export default function MiniDrawer() {
   const { user } = useAuth();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  // const [videos, setVideos] = useState([]);
+  // const [filteredData, setFilteredData] = useState([]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
