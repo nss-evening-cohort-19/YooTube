@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -11,17 +11,22 @@ const initialState = {
   commentText: '',
 };
 
-const obj = {};
-
 // eslint-disable-next-line react/prop-types
-function CommentForm({ videoFirebaseKey }) {
+function CommentForm({ videoFirebaseKey, commentObj }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [comment, setComment] = useState();
   const router = useRouter();
   const { user } = useAuth();
 
-  // useEffect(() => {
-  //   if (obj.commentFirebaseKey) setFormInput(obj);
-  // }, [obj, user]);
+  useEffect(() => {
+    if (commentObj.commentFirebaseKey) {
+      setComment(commentObj);
+      setFormInput(commentObj);
+    } else {
+      setComment({});
+      setFormInput(initialState);
+    }
+  }, [user, commentObj]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,14 +44,21 @@ function CommentForm({ videoFirebaseKey }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.commentFirebaseKey) {
+    if (comment.commentFirebaseKey) {
       updateComment(formInput)
-        .then(() => router.push(`/video/${videoFirebaseKey}`));
+        .then(() => {
+          setComment({});
+          setFormInput(initialState);
+          router.push(`/video/${videoFirebaseKey}`);
+        });
     } else {
       const payload = {
         ...formInput, uid: user.uid, date: date(), displayName: user.displayName, photoURL: user.photoURL, videoFirebaseKey,
       };
-      createComment(payload).then(() => router.push(`/video/${videoFirebaseKey}`));
+      createComment(payload).then(() => {
+        setFormInput(initialState);
+        router.push(`/video/${videoFirebaseKey}`);
+      });
     }
   };
 
@@ -65,7 +77,7 @@ function CommentForm({ videoFirebaseKey }) {
           />
         </FloatingLabel>
 
-        <Button type="submit">{obj.commentFirebaseKey ? 'Update' : ''} Comment</Button>
+        <Button type="submit">{comment?.commentFirebaseKey ? 'Update' : ''} Comment</Button>
       </Form>
     </>
 
@@ -73,7 +85,7 @@ function CommentForm({ videoFirebaseKey }) {
 }
 
 CommentForm.propTypes = {
-  obj: PropTypes.shape({
+  commentObj: PropTypes.shape({
     commentFirebaseKey: PropTypes.string,
     videoFirebaseKey: PropTypes.string,
     name: PropTypes.string,
@@ -81,7 +93,7 @@ CommentForm.propTypes = {
 };
 
 CommentForm.defaultProps = {
-  obj: initialState,
+  commentObj: initialState,
 };
 
 export default CommentForm;
