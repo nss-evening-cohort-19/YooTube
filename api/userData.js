@@ -3,15 +3,17 @@ import { clientCredentials } from '../utils/client';
 
 const dbUrl = clientCredentials.databaseURL;
 
+const addUser = (user) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/users.json`, user)
+    .then((firebaseKey) => {
+      const update = { userFirebaseKey: firebaseKey.data.name };
+      axios.patch(`${dbUrl}/users/${firebaseKey.data.name}.json`, update);
+    }).then(resolve).catch(reject);
+});
+
 const getUser = (uid) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/users.json?orderBy="uid"&equalTo="${uid}"`)
     .then((response) => resolve(Object.values(response.data)[0]))
-    .catch((reject));
-});
-
-const getUserHistory = (uid) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/users.json?orderBy="uid"&equalTo="${uid}"`)
-    .then((reponse) => resolve(reponse.data.history))
     .catch((reject));
 });
 
@@ -23,4 +25,4 @@ const updateUser = (uid, userUpdate) => new Promise((resolve, reject) => {
 });
 
 // eslint-disable-next-line import/prefer-default-export
-export { getUserHistory, updateUser, getUser };
+export { updateUser, getUser, addUser };

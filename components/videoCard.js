@@ -1,14 +1,14 @@
 /* eslint-disable react/void-dom-elements-no-children */
 import { React } from 'react';
-import { Card, Image } from 'react-bootstrap';
+import {
+  Card, Image, Dropdown, DropdownButton,
+} from 'react-bootstrap';
 import YouTube from 'react-youtube';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
 import IconButton from '@mui/material/IconButton';
-
 import { getVideoComments } from '../api/commentData';
 import { deleteVideoComments } from '../api/mergedData';
 
@@ -24,6 +24,10 @@ function VideoCard({
     }
   };
 
+  const addToWatchLater = () => {
+    console.warn('add to watch later clicked');
+  };
+
   return (
     <div>
       <Card className="videoCard">
@@ -36,11 +40,15 @@ function VideoCard({
             </Link>
             <Card.Text className="vidCardCreatorName">{obj.creatorName}</Card.Text>
           </div>
+          <DropdownButton align="end" className="cardDropdown">
+            <Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}>Add to Watch Later</Dropdown.Item>
+          </DropdownButton>
         </Card.Body>
         {router === '/yourVideos' ? (
           <div className="card-buttons">
             <Link href={`/video/edit/${obj.videoFirebaseKey}`} passHref>
               <IconButton aria-label="edit" className="edit-btn">
+                {/* <i class="fa-solid fa-ellipsis-vertical" /> */}
                 <EditIcon style={{ color: 'white' }} />
               </IconButton>
             </Link>

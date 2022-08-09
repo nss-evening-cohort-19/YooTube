@@ -12,6 +12,13 @@ const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
   }).catch(reject);
 });
 
+const getUserHistory = (uid) => new Promise((resolve, reject) => {
+  getUser(uid).then((userObj) => {
+    const getHistoryVideos = userObj.history.map((firebaseKey) => getSingleVideo(firebaseKey));
+    Promise.all(getHistoryVideos).then(resolve);
+  }).catch(reject);
+});
+
 const addToUserHistory = (uid, videoFirebaseKey) => new Promise((resolve, reject) => {
   getUser(uid).then((userObj) => {
     const userHistory = userObj.history;
@@ -51,5 +58,5 @@ const deleteVideoComments = (videoFirebaseKey) => new Promise((resolve, reject) 
 });
 
 export {
-  getVideoAndComments, addToUserHistory, getUsersLikedVideos, deleteVideoComments,
+  getVideoAndComments, addToUserHistory, getUsersLikedVideos, deleteVideoComments, getUserHistory,
 };
