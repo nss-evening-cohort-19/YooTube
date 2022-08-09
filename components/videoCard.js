@@ -27,27 +27,27 @@ function VideoCard({
   const timeDifference = () => {
     const diff = Math.abs(new Date() - new Date(obj.date.replace(/-/g, '/')));
     if (diff / 1000 < 60) {
-      if ((diff / 1000 < 60) < 2) {
+      if ((diff / 1000 < 60) < 1.5) {
         return `${Math.round(diff / 1000)} Second Ago`;
       }
       return `${Math.round(diff / 1000)} Seconds Ago`;
     } if (diff / (1000 * 60) < 60) {
-      if ((diff / (1000 * 60) < 2)) {
+      if ((diff / (1000 * 60) < 1.5)) {
         return `${Math.round(diff / (1000 * 60))} Minute Ago`;
       }
       return `${Math.round(diff / (1000 * 60))} Minutes Ago`;
     } if (diff / (1000 * 60 * 60) < 60) {
-      if ((diff / (1000 * 60 * 60) < 2)) {
+      if ((diff / (1000 * 60 * 60) < 1.5)) {
         return `${Math.round(diff / (1000 * 60 * 60))} Hour Ago`;
       }
       return `${Math.round(diff / (1000 * 60 * 60))} Hours Ago`;
     } if (diff / (1000 * 60 * 60 * 24) < 6.5) {
-      if ((diff / (1000 * 60 * 60 * 24) < 2)) {
+      if ((diff / (1000 * 60 * 60 * 24) < 1.5)) {
         return `${Math.round(diff / (1000 * 60 * 60 * 24))} Day Ago`;
       }
       return `${Math.round(diff / (1000 * 60 * 60 * 24))} Days Ago`;
     } if (diff / (1000 * 60 * 60 * 24 * 7) < 7) {
-      if ((diff / (1000 * 60 * 60 * 24 * 7) < 2)) {
+      if ((diff / (1000 * 60 * 60 * 24 * 7) < 1.5)) {
         return `${Math.round(diff / (1000 * 60 * 60 * 24 * 7))} Week Ago`;
       }
       return `${Math.round(diff / (1000 * 60 * 60 * 24 * 7))} Weeks Ago`;
