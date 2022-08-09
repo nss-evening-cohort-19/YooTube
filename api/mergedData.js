@@ -1,8 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import { getVideoComments } from './commentData';
+import { deleteComment, getVideoComments } from './commentData';
 import { getUser, updateUser } from './userData';
-import { getSingleVideo } from './videoData';
-import { getVideoComments, deleteComment } from './commentData';
 import { deleteSingleVideo, getSingleVideo } from './videoData';
 import { getLikesByUser } from './likeData';
 
@@ -16,16 +14,23 @@ const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
 
 const addToUserHistory = (uid, videoFirebaseKey) => new Promise((resolve, reject) => {
   getUser(uid).then((userObj) => {
-    console.warn(userObj);
-    // eslint-disable-next-line prefer-destructuring
-    const history = userObj.history;
-    const update = [videoFirebaseKey, ...history];
-    const updatedUser = { ...userObj, history: update };
-    updateUser(uid, updatedUser).then(resolve);
+    const userHistory = userObj.history;
+    if (userObj.history === undefined) {
+      const updatedUser = { ...userObj, history: [videoFirebaseKey] };
+      updateUser(uid, updatedUser).then(resolve);
+    } else if (userHistory?.includes(videoFirebaseKey)) {
+      userHistory.splice(userHistory.indexOf(videoFirebaseKey), 1).unshift(videoFirebaseKey);
+      const update = [videoFirebaseKey, ...userHistory];
+      const updatedUser = { ...userObj, history: update };
+      updateUser(uid, updatedUser).then(resolve);
+    } else {
+      const update = [videoFirebaseKey, ...userHistory];
+      const updatedUser = { ...userObj, history: update };
+      updateUser(uid, updatedUser).then(resolve);
+    }
   }).catch(reject);
 });
 
-export { getVideoAndComments, addToUserHistory };
 const getUsersLikedVideos = async (uid) => {
   const userLikes = await getLikesByUser(uid);
   const likedVideos = userLikes.map((like) => like.videoFirebaseKey);
@@ -45,4 +50,6 @@ const deleteVideoComments = (videoFirebaseKey) => new Promise((resolve, reject) 
   }).catch((error) => reject(error));
 });
 
-export { getVideoAndComments, getUsersLikedVideos, deleteVideoComments, addToUserHistory };
+export {
+  getVideoAndComments, addToUserHistory, getUsersLikedVideos, deleteVideoComments,
+};
