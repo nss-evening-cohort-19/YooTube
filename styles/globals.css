@@ -116,3 +116,15 @@ body {
 .mainPageFilterButtons {
   margin-right: 10px;
 }
+
+.uploaded {
+  display: flex;
+  font-size: 12px;
+  color: lightgray;
+  justify-content: left;
+}
+
+.card-buttons {
+  display: flex;
+  align-self: flex-end;
+}
