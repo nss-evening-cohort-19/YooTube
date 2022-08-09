@@ -25,6 +25,7 @@ export default function SearchBar() {
         pathname: '/search',
         query: { keyword: searchInput },
       });
+      setSearchInput('');
     }
   };
 
