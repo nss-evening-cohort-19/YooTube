@@ -17,6 +17,7 @@ import CommentForm from '../../components/forms/CommentForm';
 function ViewVideo() {
   const [video, setVideo] = useState({});
   const [likes, setLikes] = useState([]);
+  const [commentToUpdate, setCommentToUpdate] = useState({});
   const router = useRouter();
   const { firebaseKey } = router.query;
   const { user } = useAuth();
@@ -78,12 +79,12 @@ function ViewVideo() {
         </Card>
       </div>
       <div className="addComment">
-        <CommentForm videoFirebaseKey={video.videoFirebaseKey} />
+        <CommentForm commentObj={commentToUpdate} videoFirebaseKey={video.videoFirebaseKey} />
       </div>
-      <div className="commentsDiv">
+      <div id="commentDiv" className="commentsDiv">
         {
         video.comments?.map((comment) => (
-          <CommentCard commentObj={comment} key={comment.commentfirebaseKey} />
+          <CommentCard setCommentToUpdate={setCommentToUpdate} commentObj={comment} key={comment.commentfirebaseKey} onUpdate={getVideoAndComments} />
         ))
         }
       </div>
