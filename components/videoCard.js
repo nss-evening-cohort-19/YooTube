@@ -27,6 +27,9 @@ function VideoCard({
   const timeDifference = () => {
     const diff = Math.abs(new Date() - new Date(obj.date.replace(/-/g, '/')));
     if (diff / 1000 < 60) {
+      if ((diff / 1000 < 60) < 2) {
+        return `${Math.round(diff / 1000)} Second Ago`;
+      }
       return `${Math.round(diff / 1000)} Seconds Ago`;
     } if (diff / (1000 * 60) < 60) {
       if ((diff / (1000 * 60) < 2)) {
@@ -38,7 +41,7 @@ function VideoCard({
         return `${Math.round(diff / (1000 * 60 * 60))} Hour Ago`;
       }
       return `${Math.round(diff / (1000 * 60 * 60))} Hours Ago`;
-    } if (diff / (1000 * 60 * 60 * 24) < 7) {
+    } if (diff / (1000 * 60 * 60 * 24) < 6.5) {
       if ((diff / (1000 * 60 * 60 * 24) < 2)) {
         return `${Math.round(diff / (1000 * 60 * 60 * 24))} Day Ago`;
       }
