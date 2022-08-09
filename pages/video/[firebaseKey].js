@@ -2,19 +2,41 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import YouTube from 'react-youtube';
-import { Card, Button, Image } from 'react-bootstrap';
+import { Card, Image } from 'react-bootstrap';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+// import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+// import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import IconButton from '@mui/material/IconButton';
 import { addToUserHistory, getVideoAndComments } from '../../api/mergedData';
 import CommentCard from '../../components/CommentCard';
 import { useAuth } from '../../utils/context/authContext';
+import { createLike, deleteSingleLike, getVideoLikes } from '../../api/likeData';
+import CommentForm from '../../components/forms/CommentForm';
 
 function ViewVideo() {
-  const { user } = useAuth();
+  const [video, setVideo] = useState({});
+  const [likes, setLikes] = useState([]);
   const router = useRouter();
   const { firebaseKey } = router.query;
-  const [video, setVideo] = useState({});
+  const { user } = useAuth();
 
   const getTheVideo = () => {
     getVideoAndComments(firebaseKey).then(setVideo);
+    getVideoLikes(firebaseKey).then(setLikes);
+  };
+
+  const handleClick = () => {
+    const userLiked = likes.filter((like) => like.uid === user.uid);
+    if (userLiked.length) {
+      deleteSingleLike(userLiked[0].likeFirebaseKey);
+    } else {
+      const payload = {
+        uid: user.uid,
+        videoFirebaseKey: firebaseKey,
+      };
+      createLike(payload);
+    }
   };
 
   useEffect(() => {
@@ -43,12 +65,20 @@ function ViewVideo() {
               <Card.Text className="vidDate">{video.date}</Card.Text>
             </div>
             <div className="vidButtonDiv">
-              <Button>👍</Button>
-              <Card.Text className="vidLikes">Likes: {video.likes}</Card.Text>
-              <Button>👎</Button>
+              <IconButton aria-label="like-btn" className="like-btn " onClick={handleClick}>
+                {likes.filter((like) => like.uid === user.uid).length ? (
+                  <ThumbUpAltIcon />
+                ) : (
+                  <ThumbUpOffAltIcon />
+                ) }
+              </IconButton>
+              <Card.Text className="vidLikes"><strong>Likes: {likes.length}</strong></Card.Text>
             </div>
           </Card.Body>
         </Card>
+      </div>
+      <div className="addComment">
+        <CommentForm videoFirebaseKey={video.videoFirebaseKey} />
       </div>
       <div className="commentsDiv">
         {

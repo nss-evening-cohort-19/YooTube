@@ -9,8 +9,8 @@ import { createVideo, updateVideo } from '../../api/videoData';
 import getCategories from '../../api/categoryData';
 
 const initialState = {
-  likes: 0,
   views: 0,
+
 };
 
 function VideoForm({ obj }) {
@@ -98,7 +98,7 @@ function VideoForm({ obj }) {
             onChange={handleChange}
             className="mb-3"
             value={obj.category}
-            // required
+            required
           >
             <option value="">Select a Category</option>
             {

@@ -3,6 +3,25 @@ import { clientCredentials } from '../utils/client';
 
 const dbUrl = clientCredentials.databaseURL;
 
+const getPublicVideos = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/videos.json?orderBy="isPublic"&equalTo=true`)
+    .then((response) => {
+      if (response.data) {
+        resolve(Object.values(response.data));
+      } else {
+        resolve([]);
+      }
+    }).catch((error) => reject(error));
+});
+
+const getPublicVideosbyCategory = (category) => new Promise((resolve, reject) => {
+  getPublicVideos().then((publicVideos) => {
+    const filteredPublicVideos = publicVideos.filter((publicVideo) => publicVideo.category === category);
+    resolve(filteredPublicVideos);
+  })
+    .catch((error) => reject(error));
+});
+
 const getSingleVideo = (firebaseKey) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/videos/${firebaseKey}.json`)
     .then((response) => resolve(response.data))
@@ -16,18 +35,6 @@ const createVideo = (videoObj) => new Promise((resolve, reject) => {
       axios.patch(`${dbUrl}/videos/${response.data.name}.json`, payload)
         .then((patchResponse) => resolve(patchResponse.data));
     }).catch(reject);
-});
-
-const getPublicVideos = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/videos.json?orderBy="isPublic"&equalTo=true`)
-    .then((response) => {
-      if (response.data) {
-        resolve(Object.values(response.data));
-      } else {
-        resolve([]);
-      }
-    })
-    .catch(reject);
 });
 
 const getUserVideos = (uid) => new Promise((resolve, reject) => {
@@ -59,5 +66,5 @@ const deleteSingleVideo = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 export {
-  createVideo, updateVideo, getUserVideos, getSingleVideo, getPublicVideos, deleteSingleVideo,
+  createVideo, deleteSingleVideo, getPublicVideosbyCategory, updateVideo, getUserVideos, getSingleVideo, getPublicVideos,
 };
