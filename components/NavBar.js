@@ -26,6 +26,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import ExploreIcon from '@mui/icons-material/Explore';
+import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import {
   Avatar, Button as MuiButton, ListItemText, Menu, MenuItem,
 } from '@mui/material';
@@ -264,6 +265,28 @@ export default function MiniDrawer() {
           { user
             ? (
               <>
+                <ListItem disablePadding sx={{ display: 'block' }}>
+                  <Link passHref href="/library">
+                    <ListItemButton
+                      sx={{
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',
+                        px: 2.5,
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <VideoLibraryIcon />
+                      </ListItemIcon>
+                      <ListItemText sx={{ opacity: open ? 1 : 0 }}>Library</ListItemText>
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
                 <ListItem disablePadding sx={{ display: 'block' }}>
                   <Link passHref href="/video/new">
                     <ListItemButton
