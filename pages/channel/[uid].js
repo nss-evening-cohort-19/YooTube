@@ -1,33 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../utils/context/authContext';
-import { getUserVideos } from '../../api/videoData';
+import { Card } from 'react-bootstrap';
 import VideoCard from '../../components/videoCard';
-import ProfileCard from '../../components/ProfileCard';
+import { getUserVideos } from '../../api/videoData';
 
-function YourVideos() {
+function UserVideos() {
   const [videos, setVideos] = useState([]);
   const router = useRouter();
-  const { user } = useAuth();
 
-  const getYourVideos = () => {
-    getUserVideos(user.uid).then(setVideos);
+  const getChannelVideos = () => {
+    getUserVideos(videos.uid).then(setVideos);
   };
 
+  console.warn(videos.uid);
+  console.warn(videos.displayName);
+
   useEffect(() => {
-    getYourVideos();
+    getChannelVideos();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="text-center my-4">
-      <div className="studio">
-        <ProfileCard />
+      <div className="userChannel">
+        <Card style={{ width: '18rem' }}>
+          <Card.Body>
+            <Card.Title>{videos.displayName}</Card.Title>
+          </Card.Body>
+        </Card>
       </div>
       <h2>User Videos</h2>
       <div className="d-flex flex-wrap">
         {videos?.map((video) => (
-          <VideoCard key={video.videoFirebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getYourVideos} router={router.asPath} />
+          <VideoCard key={video.videoFirebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getChannelVideos} router={router.asPath} />
         ))}
       </div>
 
@@ -35,4 +40,4 @@ function YourVideos() {
   );
 }
 
-export default YourVideos;
+export default UserVideos;
