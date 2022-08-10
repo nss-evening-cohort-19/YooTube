@@ -64,21 +64,27 @@ function CommentForm({ videoFirebaseKey, commentObj }) {
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      {user.uid ? (
+        <Form onSubmit={handleSubmit}>
 
-        <FloatingLabel controlId="floatingInput3" label="Add a comment.." className="mb-3">
-          <Form.Control
-            type="text"
-            placeholder="Add a comment..."
-            name="commentText"
-            value={formInput.commentText}
-            onChange={handleChange}
-            required
-          />
-        </FloatingLabel>
+          <FloatingLabel controlId="floatingInput3" label="Add a comment.." className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="Add a comment..."
+              name="commentText"
+              value={formInput.commentText}
+              onChange={handleChange}
+              required
+            />
+          </FloatingLabel>
 
-        <Button type="submit">{comment?.commentFirebaseKey ? 'Update' : ''} Comment</Button>
-      </Form>
+          <Button type="submit">{comment?.commentFirebaseKey ? 'Update' : ''} Comment</Button>
+        </Form>
+      ) : (
+        <div>
+          <h5>Sign in to add comments</h5>
+        </div>
+      )}
     </>
 
   );

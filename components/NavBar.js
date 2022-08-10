@@ -1,4 +1,5 @@
 import * as React from 'react';
+// import { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -16,7 +17,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Link from 'next/link';
 import {
-  Navbar, Nav, Button, Form,
+  Navbar, Nav,
 } from 'react-bootstrap';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -24,7 +25,6 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import SearchIcon from '@mui/icons-material/Search';
 import ExploreIcon from '@mui/icons-material/Explore';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import {
@@ -36,6 +36,7 @@ import Image from 'next/image';
 import svgicon from '../icons/icons8-youtube.svg';
 import { useAuth } from '../utils/context/authContext';
 import { signIn, signOut } from '../utils/auth';
+import SearchBar from './SearchBar';
 
 const drawerWidth = 240;
 
@@ -108,6 +109,8 @@ export default function MiniDrawer() {
   const { user } = useAuth();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  // const [videos, setVideos] = useState([]);
+  // const [filteredData, setFilteredData] = useState([]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -149,17 +152,7 @@ export default function MiniDrawer() {
               <Image src={svgicon} alt="youtube" />
             </Navbar.Brand>
           </Link>
-          <Nav.Item className="searchBar ms-auto">
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-dark"><SearchIcon /></Button>
-            </Form>
-          </Nav.Item>
+          <SearchBar />
           <Nav className="justify-content-end">
             <Link passHref href="/video/new">
               <Nav.Item className="d-flex">
@@ -194,7 +187,11 @@ export default function MiniDrawer() {
                         horizontal: 'center',
                       }}
                     >
-                      <MenuItem onClick={handleClose}><MuiButton onClick={signOut}><LogoutIcon /> Sign Out</MuiButton></MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        <Link href="/" passHref>
+                          <MuiButton onClick={signOut}><LogoutIcon /> Sign Out</MuiButton>
+                        </Link>
+                      </MenuItem>
                     </Menu>
                   </div>
                 )
