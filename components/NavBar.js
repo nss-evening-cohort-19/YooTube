@@ -121,7 +121,7 @@ export default function MiniDrawer() {
 
   useEffect(() => {
     getRandomVideoFirebaseKey();
-  }, []);
+  }, [randomVideoFirebaseKey]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
