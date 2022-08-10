@@ -28,10 +28,12 @@ function YourVideos() {
           <Image src={logo} alt="Yootube Studio" />
           <ProfileCard />
           <h2>My Videos</h2>
-          <div className="d-flex flex-wrap">
-            {videos?.map((video) => (
-              <VideoCard key={video.videoFirebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getYourVideos} router={router.asPath} />
-            ))}
+          <div>
+            <div className="d-flex flex-wrap">
+              {videos?.map((video) => (
+                <VideoCard key={video.videoFirebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getYourVideos} router={router.asPath} />
+              ))}
+            </div>
           </div>
         </div>
       ) : (
