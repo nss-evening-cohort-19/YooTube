@@ -40,7 +40,7 @@ function VideoCard({
         return `${Math.round(diff / (1000 * 60))} Minute Ago`;
       }
       return `${Math.round(diff / (1000 * 60))} Minutes Ago`;
-    } if (diff / (1000 * 60 * 60) < 60) {
+    } if (diff / (1000 * 60 * 60) < 23.5) {
       if ((diff / (1000 * 60 * 60) < 1.5)) {
         return `${Math.round(diff / (1000 * 60 * 60))} Hour Ago`;
       }
