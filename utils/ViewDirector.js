@@ -5,25 +5,9 @@ import Loading from '../components/Loading';
 // import NavBar from '../components/NavBar';
 // import SideBar from '../components/SideBar';
 import MiniDrawer from '../components/NavBar';
-import { addUser, getUser } from '../api/userData';
 
 const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) => {
   const { userLoading } = useAuth();
-  const { user } = useAuth();
-  if (user) {
-    getUser(user.uid).then((response) => {
-      // eslint-disable-next-line no-empty
-      if (response) {
-      } else {
-        const userCreate = {
-          uid: user.uid,
-        };
-        addUser(userCreate);
-      }
-    });
-  // eslint-disable-next-line no-empty
-  } else {
-  }
 
   // if user state is null, then show loader
   if (userLoading) {

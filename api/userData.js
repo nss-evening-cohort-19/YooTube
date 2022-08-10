@@ -4,13 +4,12 @@ import { clientCredentials } from '../utils/client';
 const dbUrl = clientCredentials.databaseURL;
 
 const addUser = (user) => new Promise((resolve, reject) => {
-  if (user) {
-    axios.post(`${dbUrl}/users.json`, user)
-      .then((firebaseKey) => {
-        const update = { userFirebaseKey: firebaseKey.data.name };
-        axios.patch(`${dbUrl}/users/${firebaseKey.data.name}.json`, update);
-      }).then(resolve).catch(reject);
-  }
+  axios.post(`${dbUrl}/users.json`, user)
+    .then((firebaseKey) => {
+      const update = { userFirebaseKey: firebaseKey.data.name };
+      axios.patch(`${dbUrl}/users/${firebaseKey.data.name}.json`, update)
+        .then((response) => resolve(response.data));
+    }).catch(reject);
 });
 
 const getUser = (uid) => new Promise((resolve, reject) => {
