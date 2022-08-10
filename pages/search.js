@@ -5,17 +5,7 @@ import VideoCard from '../components/videoCard';
 
 export default function SearchPage() {
   const router = useRouter();
-  // const [videos, setVideos] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-
-  // const getFilteredVideos = () => {
-
-  //   console.warn(videos);
-
-  //   console.warn(results);
-
-  //   console.warn(filteredData);
-  // };
 
   const getVideos = () => {
     getPublicVideos().then((videoArr) => {
@@ -28,13 +18,14 @@ export default function SearchPage() {
 
   useEffect(() => {
     getVideos();
+    setFilteredData([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [router.query.keyword]);
 
   return (
     <>
       <h1>Search Results</h1>
-      <h2>You searched for...{router.query.keyword}</h2>
+      <h2>You searched for...{router.query.keyword.toLocaleUpperCase()}</h2>
       <div>
         {filteredData.length ? filteredData.map((video) => (
           <VideoCard key={video.videoFirebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getVideos} />

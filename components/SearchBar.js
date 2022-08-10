@@ -11,16 +11,11 @@ export default function SearchBar() {
   const handleChange = (e) => {
     const { value } = e.target;
     setSearchInput(value);
-    // const results = videos.filter((video) => video.name.toLowerCase().includes(value.toLowerCase()));
-    console.warn(value);
-    // setFilteredData(results);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      console.warn(router.query);
-      console.warn('Enter pressed');
       router.push({
         pathname: '/search',
         query: { keyword: searchInput },
@@ -40,10 +35,3 @@ export default function SearchBar() {
     </Nav.Item>
   );
 }
-
-// SearchBar.propTypes = {
-//   videos: PropTypes.arrayOf(PropTypes.shape({
-//     name: PropTypes.string,
-//   })).isRequired,
-//   setFilteredData: PropTypes.func.isRequired,
-// };
