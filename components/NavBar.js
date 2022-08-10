@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -37,6 +37,7 @@ import svgicon from '../icons/icons8-youtube.svg';
 import { useAuth } from '../utils/context/authContext';
 import { signIn, signOut } from '../utils/auth';
 import SearchBar from './SearchBar';
+import { getAllPublicVideoFirebaseKeys } from '../api/videoData';
 
 const drawerWidth = 240;
 
@@ -109,8 +110,18 @@ export default function MiniDrawer() {
   const { user } = useAuth();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  // const [videos, setVideos] = useState([]);
+  const [randomVideoFirebaseKey, setRandomVideoFirebaseKey] = useState('');
   // const [filteredData, setFilteredData] = useState([]);
+
+  const getRandomVideoFirebaseKey = () => {
+    getAllPublicVideoFirebaseKeys().then((firebaseKeysArray) => {
+      setRandomVideoFirebaseKey(firebaseKeysArray[Math.floor(Math.random() * firebaseKeysArray.length)]);
+    });
+  };
+
+  useEffect(() => {
+    getRandomVideoFirebaseKey();
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -235,24 +246,26 @@ export default function MiniDrawer() {
             </Link>
           </ListItem>
           <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+            <Link passHref href={`/video/${randomVideoFirebaseKey}`}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
                 }}
               >
-                <GroupWorkIcon />
-              </ListItemIcon>
-              <ListItemText sx={{ opacity: open ? 1 : 0 }}>Shorts</ListItemText>
-            </ListItemButton>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <GroupWorkIcon />
+                </ListItemIcon>
+                <ListItemText sx={{ opacity: open ? 1 : 0 }}>Shorts</ListItemText>
+              </ListItemButton>
+            </Link>
           </ListItem>
         </List>
 
