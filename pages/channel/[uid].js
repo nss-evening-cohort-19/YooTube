@@ -10,10 +10,8 @@ function UserVideos() {
 
   const getChannelVideos = () => {
     getUserVideos(videos.uid).then(setVideos);
+    console.warn(videos);
   };
-
-  console.warn(videos.uid);
-  console.warn(videos.displayName);
 
   useEffect(() => {
     getChannelVideos();
@@ -25,7 +23,7 @@ function UserVideos() {
       <div className="userChannel">
         <Card style={{ width: '18rem' }}>
           <Card.Body>
-            <Card.Title>{videos.displayName}</Card.Title>
+            <Card.Title>name here</Card.Title>
           </Card.Body>
         </Card>
       </div>
