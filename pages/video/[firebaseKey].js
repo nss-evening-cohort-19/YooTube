@@ -45,7 +45,11 @@ function ViewVideo() {
   }, [video]);
 
   const addVideoToUserHistory = () => {
-    addToUserHistory(user.uid, firebaseKey);
+    if (user) {
+      addToUserHistory(user.uid, firebaseKey);
+    // eslint-disable-next-line no-empty
+    } else {
+    }
   };
 
   useEffect(() => {
