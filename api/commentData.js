@@ -18,8 +18,14 @@ const getVideoComments = (videoFirebaseKey) => new Promise((resolve, reject) => 
     .catch(reject);
 });
 
+const getSingleComment = (commentFirebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/comments.json?orderBy="commentFirebaseKey"&equalTo="${commentFirebaseKey}"`)
+    .then((response) => resolve(Object.values(response.data)))
+    .catch(reject);
+});
+
 const updateComment = (commentObj) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/comments/${commentObj.commentfirebaseKey}.json`, commentObj)
+  axios.patch(`${dbUrl}/comments/${commentObj.commentFirebaseKey}.json`, commentObj)
     .then(() => {
       getVideoComments(commentObj.videoFirebaseKey).then(resolve);
     })
@@ -35,5 +41,5 @@ const deleteComment = (commentfirebaseKey) => new Promise((resolve, reject) => {
 });
 
 export {
-  getVideoComments, updateComment, deleteComment, createComment,
+  getVideoComments, updateComment, deleteComment, createComment, getSingleComment,
 };

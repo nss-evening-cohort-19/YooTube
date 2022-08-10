@@ -187,7 +187,11 @@ export default function MiniDrawer() {
                         horizontal: 'center',
                       }}
                     >
-                      <MenuItem onClick={handleClose}><MuiButton onClick={signOut}><LogoutIcon /> Sign Out</MuiButton></MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        <Link href="/" passHref>
+                          <MuiButton onClick={signOut}><LogoutIcon /> Sign Out</MuiButton>
+                        </Link>
+                      </MenuItem>
                     </Menu>
                   </div>
                 )
