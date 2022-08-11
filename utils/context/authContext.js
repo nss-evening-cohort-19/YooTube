@@ -29,6 +29,7 @@ const AuthProvider = (props) => {
           if (!response) {
             const userCreate = {
               uid: fbUser.uid,
+              userName: fbUser.displayName,
             };
             await addUser(userCreate).then(() => setUser(fbUser));
           } else {
