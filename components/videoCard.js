@@ -1,27 +1,46 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/void-dom-elements-no-children */
 import { React } from 'react';
-import { Card, Image } from 'react-bootstrap';
+import {
+  Card, Image, Dropdown, DropdownButton,
+} from 'react-bootstrap';
 import YouTube from 'react-youtube';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
 import IconButton from '@mui/material/IconButton';
-
 import { getVideoComments } from '../api/commentData';
-import { deleteVideoComments } from '../api/mergedData';
+import {
+  addToUserWatchLater, deleteUserHistory, deleteVideoComments, deleteWatchLater,
+} from '../api/mergedData';
+import { useAuth } from '../utils/context/authContext';
 
 // eslint-disable-next-line react/prop-types
 function VideoCard({
-  obj, opts, onUpdate, router,
+  obj, opts, onUpdate, router, name,
 }) {
+  const { user } = useAuth();
   const deleteThisVideo = () => {
     if (window.confirm('Delete this video?')) {
       getVideoComments(obj.videoFirebaseKey).then(() => {
         deleteVideoComments(obj.videoFirebaseKey).then(() => onUpdate());
       });
     }
+  };
+
+  const addToWatchLater = () => {
+    addToUserWatchLater(user.uid, obj.videoFirebaseKey);
+  };
+
+  const removeFromHistory = async () => {
+    await deleteUserHistory(user.uid, obj.videoFirebaseKey);
+    onUpdate();
+  };
+
+  const removeFromWatchLater = async () => {
+    await deleteWatchLater(user.uid, obj.videoFirebaseKey);
+    onUpdate();
   };
 
   const timeDifference = () => {
@@ -36,7 +55,7 @@ function VideoCard({
         return `${Math.round(diff / (1000 * 60))} Minute Ago`;
       }
       return `${Math.round(diff / (1000 * 60))} Minutes Ago`;
-    } if (diff / (1000 * 60 * 60) < 60) {
+    } if (diff / (1000 * 60 * 60) < 23.5) {
       if ((diff / (1000 * 60 * 60) < 1.5)) {
         return `${Math.round(diff / (1000 * 60 * 60))} Hour Ago`;
       }
@@ -46,13 +65,13 @@ function VideoCard({
         return `${Math.round(diff / (1000 * 60 * 60 * 24))} Day Ago`;
       }
       return `${Math.round(diff / (1000 * 60 * 60 * 24))} Days Ago`;
-    } if (diff / (1000 * 60 * 60 * 24 * 7) < 7) {
+    } if (diff / (1000 * 60 * 60 * 24 * 7) < 4) {
       if ((diff / (1000 * 60 * 60 * 24 * 7) < 1.5)) {
         return `${Math.round(diff / (1000 * 60 * 60 * 24 * 7))} Week Ago`;
       }
       return `${Math.round(diff / (1000 * 60 * 60 * 24 * 7))} Weeks Ago`;
     }
-    return 'Recently';
+    return 'A While Ago';
   };
 
   const uploadstatement = timeDifference();
@@ -70,8 +89,17 @@ function VideoCard({
               <Card.Title className="vidCardTitle">{obj.title}</Card.Title>
             </Link>
             <Card.Text className="vidCardCreatorName">{obj.creatorName}</Card.Text>
-            <Card.Text className="uploaded">• {uploadstatement}</Card.Text>
+            <Card.Text className="uploaded">{obj.views} view{obj.views === 1 ? '' : 's'} • {uploadstatement}</Card.Text>
           </div>
+          <DropdownButton align="end" className="cardDropdown">
+            {name === 'history' ? (
+              <><Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}>Save to Watch Later</Dropdown.Item><Dropdown.Divider /><Dropdown.Item className="cardDropDownItem" onClick={removeFromHistory}>Remove From Watch History</Dropdown.Item></>
+            ) : name === 'watch-later' ? (
+              <Dropdown.Item className="cardDropDownItem" onClick={removeFromWatchLater}>Remove From Watch Later</Dropdown.Item>
+            ) : (
+              <Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}>Save to Watch Later</Dropdown.Item>
+            )}
+          </DropdownButton>
           {router === '/yourVideos' ? (
             <div className="card-buttons">
               <Link href={`/video/edit/${obj.videoFirebaseKey}`} passHref>
@@ -105,18 +133,18 @@ VideoCard.propTypes = {
     creatorImage: PropTypes.string,
     creatorName: PropTypes.string,
     uid: PropTypes.string,
+    views: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
-  /* user: PropTypes.shape({
-    uid: PropTypes.string.isRequired,
-  }).isRequired, */
   opts: PropTypes.shape({
   }).isRequired,
   router: PropTypes.string,
+  name: PropTypes.string,
 };
 
 VideoCard.defaultProps = {
   router: '',
+  name: '',
 };
 
 export default VideoCard;

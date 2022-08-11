@@ -20,8 +20,8 @@ function CommentCard({ commentObj, onUpdate, setCommentToUpdate }) {
 
   const { user } = useAuth();
   return (
-    <Card.Body style={{ width: '36rem' }}>
-      <Image className="vidCardCreatorImage" src={commentObj.photoURL} />
+    <Card.Body className="commentCard">
+      <Image className="commentUserImage" src={commentObj.photoURL} />
       <Card.Body>
         <Card.Text>{ commentObj.displayName }</Card.Text>
         <Card.Text>{ commentObj.commentText }</Card.Text>
@@ -42,7 +42,6 @@ function CommentCard({ commentObj, onUpdate, setCommentToUpdate }) {
           <IconButton aria-label="delete" className="delete-btn " onClick={deleteThisComment}>
             <DeleteIcon style={{ color: 'red' }} />
           </IconButton>
-
         </div>
       ) : '' }
     </Card.Body>

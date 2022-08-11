@@ -7,6 +7,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { addUser, getUser } from '../../api/userData';
 import { firebase } from '../client';
 
 const AuthContext = createContext();
@@ -15,16 +16,26 @@ AuthContext.displayName = 'AuthContext'; // Context object accepts a displayName
 
 const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
-
   // there are 3 states for the user:
   // null = application initial state, not yet loaded
   // false = user is not logged in, but the app has loaded
   // an object/value = user is logged in
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((fbUser) => {
+    firebase.auth().onAuthStateChanged(async (fbUser) => {
       if (fbUser) {
-        setUser(fbUser);
+        await getUser(fbUser.uid).then(async (response) => {
+          if (!response) {
+            const userCreate = {
+              uid: fbUser.uid,
+              userName: fbUser.displayName,
+              userImage: fbUser.photoURL,
+            };
+            await addUser(userCreate).then(() => setUser(fbUser));
+          } else {
+            setUser(fbUser);
+          }
+        });
       } else {
         setUser(false);
       }
