@@ -57,8 +57,8 @@ const getUserVideos = (uid) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const updateVideo = (videoObject) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/videos/${videoObject.videoFirebaseKey}.json`, videoObject)
+const updateVideo = (videoObject, videoFirebaseKey) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/videos/${videoFirebaseKey}.json`, videoObject)
     .then(() => {
       getUserVideos(videoObject.uid).then(resolve);
     })

@@ -8,7 +8,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 // import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import IconButton from '@mui/material/IconButton';
-import { getVideoAndComments } from '../../api/mergedData';
+import { addToUserHistory, getVideoAndComments } from '../../api/mergedData';
 import CommentCard from '../../components/CommentCard';
 import { useAuth } from '../../utils/context/authContext';
 import { createLike, deleteSingleLike, getVideoLikes } from '../../api/likeData';
@@ -43,6 +43,18 @@ function ViewVideo() {
   useEffect(() => {
     getTheVideo();
   }, [video.videoFirebaseKey, video]);
+
+  const addVideoToUserHistory = () => {
+    if (user) {
+      addToUserHistory(user.uid, firebaseKey);
+    // eslint-disable-next-line no-empty
+    } else {
+    }
+  };
+
+  useEffect(() => {
+    addVideoToUserHistory();
+  }, []);
 
   return (
     <div className="">
