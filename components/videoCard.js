@@ -65,13 +65,13 @@ function VideoCard({
         return `${Math.round(diff / (1000 * 60 * 60 * 24))} Day Ago`;
       }
       return `${Math.round(diff / (1000 * 60 * 60 * 24))} Days Ago`;
-    } if (diff / (1000 * 60 * 60 * 24 * 7) < 7) {
+    } if (diff / (1000 * 60 * 60 * 24 * 7) < 4) {
       if ((diff / (1000 * 60 * 60 * 24 * 7) < 1.5)) {
         return `${Math.round(diff / (1000 * 60 * 60 * 24 * 7))} Week Ago`;
       }
       return `${Math.round(diff / (1000 * 60 * 60 * 24 * 7))} Weeks Ago`;
     }
-    return 'Recently';
+    return 'A While Ago';
   };
 
   const uploadstatement = timeDifference();
@@ -87,7 +87,7 @@ function VideoCard({
               <Card.Title className="vidCardTitle">{obj.title}</Card.Title>
             </Link>
             <Card.Text className="vidCardCreatorName">{obj.creatorName}</Card.Text>
-            <Card.Text className="uploaded">• {uploadstatement}</Card.Text>
+            <Card.Text className="uploaded">{obj.views} view{obj.views === 1 ? '' : 's'} • {uploadstatement}</Card.Text>
           </div>
           <DropdownButton align="end" className="cardDropdown">
             {name === 'history' ? (
@@ -131,6 +131,7 @@ VideoCard.propTypes = {
     creatorImage: PropTypes.string,
     creatorName: PropTypes.string,
     uid: PropTypes.string,
+    views: PropTypes.number,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
   opts: PropTypes.shape({
