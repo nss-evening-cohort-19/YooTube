@@ -23,14 +23,14 @@ const AuthProvider = (props) => {
   // an object/value = user is logged in
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((fbUser) => {
+    firebase.auth().onAuthStateChanged(async (fbUser) => {
       if (fbUser) {
-        getUser(fbUser.uid).then((response) => {
+        await getUser(fbUser.uid).then(async (response) => {
           if (!response) {
             const userCreate = {
               uid: fbUser.uid,
             };
-            addUser(userCreate).then(() => setUser(fbUser));
+            await addUser(userCreate).then(() => setUser(fbUser));
           } else {
             setUser(fbUser);
           }
