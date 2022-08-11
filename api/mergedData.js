@@ -30,7 +30,6 @@ const getUserWatchLater = (uid) => new Promise((resolve, reject) => {
 
 const addToUserHistory = (uid, videoFirebaseKey) => new Promise((resolve, reject) => {
   getSingleVideo(videoFirebaseKey).then((video) => {
-    console.warn(video);
     const payload = { views: video.views + 1 };
     updateVideo(payload, videoFirebaseKey).then(resolve);
   });
