@@ -111,7 +111,6 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [randomVideoFirebaseKey, setRandomVideoFirebaseKey] = useState('');
-  // const [filteredData, setFilteredData] = useState([]);
 
   const getRandomVideoFirebaseKey = () => {
     getAllPublicVideoFirebaseKeys().then((firebaseKeysArray) => {
@@ -121,7 +120,7 @@ export default function MiniDrawer() {
 
   useEffect(() => {
     getRandomVideoFirebaseKey();
-  }, [randomVideoFirebaseKey]);
+  });
 
   const handleDrawerOpen = () => {
     setOpen(true);
