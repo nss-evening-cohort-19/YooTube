@@ -87,7 +87,7 @@ function VideoCard({
               <Card.Title className="vidCardTitle">{obj.title}</Card.Title>
             </Link>
             <Card.Text className="vidCardCreatorName">{obj.creatorName}</Card.Text>
-            <Card.Text className="uploaded">views: {obj.views} • {uploadstatement}</Card.Text>
+            <Card.Text className="uploaded">{obj.views} view{obj.views === 1 ? '' : 's'} • {uploadstatement}</Card.Text>
           </div>
           <DropdownButton align="end" className="cardDropdown">
             {name === 'history' ? (
