@@ -1,7 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 import { deleteComment, getVideoComments } from './commentData';
 import { getUser, updateUser } from './userData';
-import { deleteSingleVideo, getPublicVideos, getSingleVideo } from './videoData';
+import {
+  deleteSingleVideo, getPublicVideos, getSingleVideo, updateVideo,
+} from './videoData';
 import { getLikesByUser, getVideoLikes } from './likeData';
 
 const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
@@ -35,6 +37,10 @@ const getUserWatchLater = (uid) => new Promise((resolve, reject) => {
 });
 
 const addToUserHistory = (uid, videoFirebaseKey) => new Promise((resolve, reject) => {
+  getSingleVideo(videoFirebaseKey).then((video) => {
+    const payload = { views: video.views + 1 };
+    updateVideo(payload, videoFirebaseKey).then(resolve);
+  });
   getUser(uid).then((userObj) => {
     const userHistory = userObj.history;
     if (userObj.history === undefined) {

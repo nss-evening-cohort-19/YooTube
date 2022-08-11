@@ -41,7 +41,7 @@ function VideoForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.videoFirebaseKey) {
-      updateVideo(formInput)
+      updateVideo(formInput, formInput.videoFirebaseKey)
         .then(() => router.push('/yourVideos'));
     } else {
       const lastIndex = formInput.videoURL.lastIndexOf('/');

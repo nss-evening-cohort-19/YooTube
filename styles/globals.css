@@ -141,7 +141,7 @@ width: 80%
 
 .uploaded {
   display: flex;
-  font-size: 12px;
+  font-size: 10px;
   color: lightgray;
   justify-content: left;
 }
