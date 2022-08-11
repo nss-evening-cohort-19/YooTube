@@ -27,11 +27,10 @@ function YourVideos() {
         <>
           <div className="YootubeStudioLargeLogo-wrapper">
             <Image src={logo} layout="intrinsic" alt="Yootube Studio" width={150} height={150} />
-            <h2>My Videos</h2>
+            <h2 className="myVideosh2">My Videos</h2>
           </div>
-          <div className="studio">
-            <ProfileCard />
-
+          <div className="studio container">
+            <ProfileCard className="profileCardYourVideos" />
             <div className="myVideosDiv">
               {videos?.map((video) => (
                 <VideoCard key={video.videoFirebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getYourVideos} router={router.asPath} />
