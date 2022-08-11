@@ -16,15 +16,23 @@ const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
 
 const getUserHistory = (uid) => new Promise((resolve, reject) => {
   getUser(uid).then((userObj) => {
-    const getHistoryVideos = userObj.history?.map((firebaseKey) => getSingleVideo(firebaseKey));
-    Promise.all(getHistoryVideos).then(resolve);
+    if (userObj.history) {
+      const getHistoryVideos = userObj.history.map((firebaseKey) => getSingleVideo(firebaseKey));
+      Promise.all(getHistoryVideos).then(resolve);
+    } else {
+      resolve([]);
+    }
   }).catch(reject);
 });
 
 const getUserWatchLater = (uid) => new Promise((resolve, reject) => {
   getUser(uid).then((userObj) => {
-    const getWatchLaterVideos = userObj.watchLater?.map((firebaseKey) => getSingleVideo(firebaseKey));
-    Promise.all(getWatchLaterVideos).then(resolve);
+    if (userObj.watchLater) {
+      const getWatchLaterVideos = userObj.watchLater.map((firebaseKey) => getSingleVideo(firebaseKey));
+      Promise.all(getWatchLaterVideos).then(resolve);
+    } else {
+      resolve([]);
+    }
   }).catch(reject);
 });
 
