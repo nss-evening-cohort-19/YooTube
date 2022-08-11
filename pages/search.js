@@ -11,7 +11,7 @@ export default function SearchPage() {
     getPublicVideos().then((videoArr) => {
       const value = router.query.keyword;
       setFilteredData(videoArr);
-      const results = videoArr.filter((video) => video.title.toLowerCase().includes(value.toLowerCase()));
+      const results = videoArr.filter((video) => video.title.toLowerCase().includes(value.toLowerCase()) || video.creatorName.toLowerCase().includes(value.toLowerCase()));
       setFilteredData(results);
     });
   };
