@@ -42,7 +42,7 @@ function ViewVideo() {
 
   useEffect(() => {
     getTheVideo();
-  }, [video]);
+  }, [video.videoFirebaseKey, video]);
 
   return (
     <div className="">

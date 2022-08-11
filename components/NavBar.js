@@ -120,7 +120,11 @@ export default function MiniDrawer() {
 
   useEffect(() => {
     getRandomVideoFirebaseKey();
-  });
+  }, [randomVideoFirebaseKey]);
+
+  const handleTheClick = () => {
+    getRandomVideoFirebaseKey();
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -252,6 +256,7 @@ export default function MiniDrawer() {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
+                onClick={handleTheClick}
               >
                 <ListItemIcon
                   sx={{
