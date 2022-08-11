@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import { getVideoComments, deleteComment } from './commentData';
+import { deleteComment, getVideoComments } from './commentData';
+import { getUser, updateUser } from './userData';
 import { deleteSingleVideo, getPublicVideos, getSingleVideo } from './videoData';
 import { getLikesByUser, getVideoLikes } from './likeData';
 
@@ -8,6 +9,71 @@ const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
     getVideoComments(firebaseKey).then((videoCommentsArr) => {
       resolve({ ...videoObj, comments: videoCommentsArr });
     });
+  }).catch(reject);
+});
+
+const getUserHistory = (uid) => new Promise((resolve, reject) => {
+  getUser(uid).then((userObj) => {
+    const getHistoryVideos = userObj.history.map((firebaseKey) => getSingleVideo(firebaseKey));
+    Promise.all(getHistoryVideos).then(resolve);
+  }).catch(reject);
+});
+
+const getUserWatchLater = (uid) => new Promise((resolve, reject) => {
+  getUser(uid).then((userObj) => {
+    const getWatchLaterVideos = userObj.watchLater.map((firebaseKey) => getSingleVideo(firebaseKey));
+    Promise.all(getWatchLaterVideos).then(resolve);
+  }).catch(reject);
+});
+
+const addToUserHistory = (uid, videoFirebaseKey) => new Promise((resolve, reject) => {
+  getUser(uid).then((userObj) => {
+    const userHistory = userObj.history;
+    if (userObj.history === undefined) {
+      const updatedUser = { ...userObj, history: [videoFirebaseKey] };
+      updateUser(uid, updatedUser).then(resolve);
+    } else if (userHistory?.includes(videoFirebaseKey)) {
+      userHistory.splice(userHistory.indexOf(videoFirebaseKey), 1).unshift(videoFirebaseKey);
+      const update = [videoFirebaseKey, ...userHistory];
+      const updatedUser = { ...userObj, history: update };
+      updateUser(uid, updatedUser).then(resolve);
+    } else {
+      const update = [videoFirebaseKey, ...userHistory];
+      const updatedUser = { ...userObj, history: update };
+      updateUser(uid, updatedUser).then(resolve);
+    }
+  }).catch(reject);
+});
+
+const addToUserWatchLater = (uid, videoFirebaseKey) => new Promise((resolve, reject) => {
+  getUser(uid).then((userObj) => {
+    const userWatchLater = userObj.watchLater;
+    if (userWatchLater === undefined) {
+      const updatedUser = { ...userObj, watchLater: [videoFirebaseKey] };
+      updateUser(uid, updatedUser).then(resolve);
+    } else if (!userWatchLater?.includes(videoFirebaseKey)) {
+      const update = [videoFirebaseKey, ...userWatchLater];
+      const updatedUser = { ...userObj, watchLater: update };
+      updateUser(uid, updatedUser).then(resolve);
+    }
+  }).catch(reject);
+});
+
+const deleteUserHistory = (uid, videoFirebaseKey) => new Promise((resolve, reject) => {
+  getUser(uid).then((userObj) => {
+    const { history } = userObj;
+    history.splice(history.indexOf(videoFirebaseKey), 1);
+    updateUser(uid, userObj)
+      .then(resolve);
+  }).catch(reject);
+});
+
+const deleteWatchLater = (uid, videoFirebaseKey) => new Promise((resolve, reject) => {
+  getUser(uid).then((userObj) => {
+    const { watchLater } = userObj;
+    watchLater.splice(watchLater.indexOf(videoFirebaseKey), 1);
+    updateUser(uid, userObj)
+      .then(resolve);
   }).catch(reject);
 });
 
@@ -51,5 +117,5 @@ const getAllPublicVideosAndLikes = async () => {
 // });
 
 export {
-  getVideoAndComments, getUsersLikedVideos, deleteVideoComments, getAllPublicVideosAndLikes,
+  getVideoAndComments, getUsersLikedVideos, deleteVideoComments, getAllPublicVideosAndLikes, getUserHistory, addToUserHistory, addToUserWatchLater, getUserWatchLater, deleteUserHistory, deleteWatchLater,
 };

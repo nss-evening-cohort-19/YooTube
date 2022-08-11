@@ -52,6 +52,44 @@ body {
   display: flex;
   flex-direction: column;
 }
+.btn-primary {
+  --bs-btn-color: none;
+  --bs-btn-bg: none;
+  --bs-btn-border-color: none;
+  --bs-btn-hover-color: none;
+  --bs-btn-hover-bg: none;
+  --bs-btn-hover-border-color: none;
+  --bs-btn-focus-shadow-rgb: none
+  --bs-btn-active-color: none;
+  --bs-btn-active-bg: none;
+  --bs-btn-active-border-color: none;
+  --bs-btn-active-shadow: none;
+  --bs-btn-disabled-color: none;
+  --bs-btn-disabled-bg: none;
+  --bs-btn-disabled-border-color: none;
+}
+.cardDropdown {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: gray!important;
+  font-size: 12px;
+}
+
+/* Library */
+.libraryVideoDivs {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 630px;
+  overflow: scroll;
+}
+
+
+
+
+
+
+/*Other Stuff */ 
 .videoCallIcon {
   color: black;
 }
@@ -73,7 +111,6 @@ body {
 .studio {
   display: flex;
   flex-direction: row;
-
 }
 
 .mainPageFilterButtons {
