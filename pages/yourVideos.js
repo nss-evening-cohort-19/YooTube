@@ -24,18 +24,21 @@ function YourVideos() {
   return (
     <div className="text-center my-4">
       {user.uid ? (
-        <div className="studio">
-          <Image src={logo} alt="Yootube Studio" />
-          <ProfileCard />
-          <h2>My Videos</h2>
-          <div>
-            <div className="d-flex flex-wrap">
+        <>
+          <div className="YootubeStudioLargeLogo-wrapper">
+            <Image src={logo} layout="intrinsic" alt="Yootube Studio" width={150} height={150} />
+            <h2>My Videos</h2>
+          </div>
+          <div className="studio">
+            <ProfileCard />
+
+            <div className="myVideosDiv">
               {videos?.map((video) => (
                 <VideoCard key={video.videoFirebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getYourVideos} router={router.asPath} />
               ))}
             </div>
           </div>
-        </div>
+        </>
       ) : (
         <div>
           <h1>Sign in to see Your Videos</h1>

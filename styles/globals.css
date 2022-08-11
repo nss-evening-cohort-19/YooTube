@@ -69,11 +69,26 @@ body {
 .container {
   margin-top: 100px;
 }
-
+/* Your Videos and Profile View */
 .studio {
   display: flex;
   flex-direction: row;
+}
 
+.myVideosh2 {
+  text-align: left;
+}
+
+.YootubeStudioLargeLogo-wrapper {
+  min-width: 200px;
+  justify-content: left;
+  text-align: left;
+}
+
+.myVideosDiv {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 .mainPageFilterButtons {
