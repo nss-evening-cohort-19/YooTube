@@ -1,7 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 import { deleteComment, getVideoComments } from './commentData';
 import { getUser, updateUser } from './userData';
-import { deleteSingleVideo, getPublicVideos, getSingleVideo } from './videoData';
+import {
+  deleteSingleVideo, getPublicVideos, getSingleVideo, updateVideo,
+} from './videoData';
 import { getLikesByUser, getVideoLikes } from './likeData';
 
 const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
@@ -14,19 +16,24 @@ const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
 
 const getUserHistory = (uid) => new Promise((resolve, reject) => {
   getUser(uid).then((userObj) => {
-    const getHistoryVideos = userObj.history.map((firebaseKey) => getSingleVideo(firebaseKey));
+    const getHistoryVideos = userObj.history?.map((firebaseKey) => getSingleVideo(firebaseKey));
     Promise.all(getHistoryVideos).then(resolve);
   }).catch(reject);
 });
 
 const getUserWatchLater = (uid) => new Promise((resolve, reject) => {
   getUser(uid).then((userObj) => {
-    const getWatchLaterVideos = userObj.watchLater.map((firebaseKey) => getSingleVideo(firebaseKey));
+    const getWatchLaterVideos = userObj.watchLater?.map((firebaseKey) => getSingleVideo(firebaseKey));
     Promise.all(getWatchLaterVideos).then(resolve);
   }).catch(reject);
 });
 
 const addToUserHistory = (uid, videoFirebaseKey) => new Promise((resolve, reject) => {
+  getSingleVideo(videoFirebaseKey).then((video) => {
+    console.warn(video);
+    const payload = { views: video.views + 1 };
+    updateVideo(payload, videoFirebaseKey).then(resolve);
+  });
   getUser(uid).then((userObj) => {
     const userHistory = userObj.history;
     if (userObj.history === undefined) {
