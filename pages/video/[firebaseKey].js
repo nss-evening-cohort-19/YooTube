@@ -49,7 +49,7 @@ function ViewVideo() {
   useEffect(() => {
     getTheVideo();
     getRelatedVideos();
-  }, [video]);
+  }, [video.videoFirebaseKey, video]);
 
   const addVideoToUserHistory = () => {
     if (user) {

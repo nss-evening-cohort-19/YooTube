@@ -121,15 +121,6 @@ const getAllPublicVideosAndLikes = async () => {
   return mostLikedVideos;
 };
 
-// const getAllPubVidAndLikes = () => new Promise((resolve, reject) => {
-//   getPublicVideos().then((publicVideos) => {
-//     const allPubVideoLikes = publicVideos.map((video) => getVideoLikes(video.videoFirebaseKey));
-//     Promise.all(allPubVideoLikes).then((response) => {
-//       resolve(response);
-//     });
-//   }).catch((error) => reject(error));
-// });
-
 export {
   getVideoAndComments, getUsersLikedVideos, deleteVideoComments, getAllPublicVideosAndLikes, getUserHistory, addToUserHistory, addToUserWatchLater, getUserWatchLater, deleteUserHistory, deleteWatchLater,
 };
