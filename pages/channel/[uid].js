@@ -9,14 +9,15 @@ function UserVideos() {
   const [videos, setVideos] = useState([]);
   const [user, setUser] = useState({});
   const router = useRouter();
+  const { uid } = router.query;
 
   const getThisUser = () => {
-    getUser(user.uid).then(setUser);
+    getUser(uid).then(setUser);
     console.warn(user);
   };
 
   const getTheseVideos = () => {
-    getUserVideos(user.uid).then(setVideos);
+    getUserVideos(uid).then(setVideos);
   };
 
   useEffect(() => {
@@ -31,10 +32,11 @@ function UserVideos() {
 
   return (
     <div className="text-center my-4">
-      <div className="userChannel">
-        <Card style={{ width: '18rem' }}>
+      <div id="userChannel" className="userChannel">
+        <Card id="channelCard" style={{ width: '18rem' }}>
           <Card.Body>
-            <Card.Title>{user.displayName}</Card.Title>
+            <Card.Img variant="side" src={user.userImage} />
+            <Card.Title>{user.userName}</Card.Title>
           </Card.Body>
         </Card>
       </div>
