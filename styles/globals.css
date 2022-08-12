@@ -172,3 +172,11 @@ align-items: center;
   max-height: 630px;
   overflow: scroll;
 }
+
+.userChannel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
