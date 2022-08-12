@@ -28,31 +28,48 @@ body {
   background-color:#181818;
   color: #ffffff;
   width: 282px; 
-  height: 300px;
+  height: 275px;
   margin: 6px;
 }
 .vidCardTitle{
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
+  width: 180px;
+  text-align: left;
+  height: 40px;
+  overflow: hidden;
+}
+.vidCardImageDiv{
+  height: 100%;
+  width: 30px;
 }
 .vidCardCreatorImage{
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
 }
 .vidCardCreatorName{
-  font-size: 10px;
+  font-size: 12px;
+  height: 12px;
 }
 .vidCardLikes{
-  font-size: 10px;
+  font-size: 11px;
 }
 .videoCardBody{
   display: flex;
+  justify-content: space-between;
   cursor: default;
 }
 .videoCardTextdiv{
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+}
+.uploaded {
+  /* display: flex; */
+  font-size: 11px;
+  /* color: lightgray; */
+  /* justify-content: left; */
 }
 .btn-primary {
   --bs-btn-color: none;
@@ -69,13 +86,6 @@ body {
   --bs-btn-disabled-color: none;
   --bs-btn-disabled-bg: none;
   --bs-btn-disabled-border-color: none;
-}
-.cardDropdown {
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background-color: gray!important;
-  font-size: 12px;
 }
 
 /*Single Video Page */
@@ -97,8 +107,6 @@ body {
 .relatedVideos{
   margin-right: auto;
   margin-left:100px;
-
-  
 }
 
 
@@ -150,13 +158,6 @@ body {
 
 .mainPageFilterButtons {
   margin-right: 10px;
-}
-
-.uploaded {
-  display: flex;
-  font-size: 10px;
-  color: lightgray;
-  justify-content: left;
 }
 
 .card-buttons {
@@ -255,4 +256,41 @@ align-items: center;
 .likedPlayer > iframe {
   margin-left: auto;
   margin-right: auto;
+}
+
+
+/*Drop Down */
+.dropdown-toggle::after{
+display: none;
+}
+.cardDropdown {
+height: 20px;
+width: 20px;
+}
+.cardDropDownItem{
+  font-size: medium;
+}
+.dropIcon{
+padding-bottom: 2px;
+height: 22px;
+width: 22px;
+}
+.dropdown-toggle{
+  width: auto;
+  margin-right: 6px;
+  padding: none;
+}
+
+/* Search Bar */
+.searchBar{
+  justify-content: center;
+}
+.css-w4z10b-MuiStack-root{
+  justify-content: center;
+}
+/*Index- Main Page*/
+.mainVideos{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

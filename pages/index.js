@@ -35,7 +35,7 @@ function Home() {
 
   return (
     <>
-      <div>
+      <div className="catFilter">
         <Stack direction="row" spacing={1}>
           <Chip label="comedy" variant="outlined" onClick={handleClick} />
           <Chip label="education" variant="outlined" onClick={handleClick} />
@@ -50,7 +50,7 @@ function Home() {
         </Stack>
       </div>
       <div className="text-center my-4">
-        <div className="d-flex flex-wrap">
+        <div className="mainVideos">
           {videos?.map((video) => (
             <VideoCard key={video.videoFirebaseKey} name="indexVideo" obj={video} user={user} opts={{ height: '160', width: '280' }} onUpdate={getAllPublicVideos} />
           ))}

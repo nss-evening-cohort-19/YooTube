@@ -5,9 +5,9 @@ import {
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import YouTube from 'react-youtube';
+import { FaEllipsisV, FaClock } from 'react-icons/fa';
 import { addToUserWatchLater } from '../api/mergedData';
 import { useAuth } from '../utils/context/authContext';
-import { Ellipsis } from '../icons/ellipsis-vertical-solid.svg';
 
 function LikedVideoCard({ obj, opts }) {
   const { user } = useAuth();
@@ -26,9 +26,8 @@ function LikedVideoCard({ obj, opts }) {
           <Card.Title className="likedCardTitle">{obj.title}</Card.Title>
         </Link>
         <Card.Text className="likedCardCreator">{obj.creatorName}</Card.Text>
-        <i src={Ellipsis}> </i>
-        <DropdownButton align="end" className="likedCardDropdown" title="">
-          <Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}>Save to Watch Later</Dropdown.Item>
+        <DropdownButton align="end" className="likedCardDropdown" title={<FaEllipsisV />}>
+          <Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}><FaClock className="dropIcon" /> Save to Watch Later</Dropdown.Item>
         </DropdownButton>
       </Card.Body>
     </Card>

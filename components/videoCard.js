@@ -7,9 +7,9 @@ import {
 import YouTube from 'react-youtube';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from '@mui/material/IconButton';
+import {
+  FaEllipsisV, FaClock, FaTrashAlt, FaPencilAlt,
+} from 'react-icons/fa';
 import { getVideoComments } from '../api/commentData';
 import {
   addToUserWatchLater, deleteUserHistory, deleteVideoComments, deleteWatchLater,
@@ -81,7 +81,9 @@ function VideoCard({
       <Card className="videoCard">
         <YouTube opts={opts} videoId={obj.videoId} />
         <Card.Body className="videoCardBody">
-          <Image className="vidCardCreatorImage" src={obj.creatorImage} />
+          <div className="vidCardImageDiv">
+            <Image className="vidCardCreatorImage" src={obj.creatorImage} />
+          </div>
           <div className="videoCardTextdiv">
             <Link href={`/video/${obj.videoFirebaseKey}`} passHref>
               <Card.Title className="vidCardTitle">{obj.title}</Card.Title>
@@ -89,29 +91,27 @@ function VideoCard({
             <Card.Text className="vidCardCreatorName">{obj.creatorName}</Card.Text>
             <Card.Text className="uploaded">{obj.views} view{obj.views === 1 ? '' : 's'} • {uploadstatement}</Card.Text>
           </div>
-          <DropdownButton align="end" className="cardDropdown" title="">
+          <DropdownButton align="end" className="cardDropdown" title={<FaEllipsisV className="dropIcon" />}>
             {name === 'history' ? (
-              <><Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}>Save to Watch Later</Dropdown.Item><Dropdown.Divider /><Dropdown.Item className="cardDropDownItem" onClick={removeFromHistory}>Remove From Watch History</Dropdown.Item></>
+              <><Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}><FaClock className="dropIcon" /> Save to Watch Later</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item className="cardDropDownItem" onClick={removeFromHistory}><FaTrashAlt className="dropIcon" /> Remove From Watch History</Dropdown.Item>
+              </>
             ) : name === 'watch-later' ? (
-              <Dropdown.Item className="cardDropDownItem" onClick={removeFromWatchLater}>Remove From Watch Later</Dropdown.Item>
+              <Dropdown.Item className="cardDropDownItem" onClick={removeFromWatchLater}><FaTrashAlt className="dropIcon" /> Remove From Watch Later</Dropdown.Item>
             ) : (
-              <Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}>Save to Watch Later</Dropdown.Item>
+              <Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}><FaClock className="dropIcon" /> Save to Watch Later</Dropdown.Item>
+            )}
+            {router === '/yourVideos' ? (
+              <>
+                <Link href={`/video/edit/${obj.videoFirebaseKey}`} passHref>
+                  <Dropdown.Item aria-label="edit" className="cardDropDownItem"><FaPencilAlt /> Edit Video</Dropdown.Item>
+                </Link><Dropdown.Item aria-label="delete" className="cardDropDownItem" onClick={deleteThisVideo}><FaTrashAlt /> Delete Video</Dropdown.Item>
+              </>
+            ) : (
+              <div />
             )}
           </DropdownButton>
-          {router === '/yourVideos' ? (
-            <div className="card-buttons">
-              <Link href={`/video/edit/${obj.videoFirebaseKey}`} passHref>
-                <IconButton aria-label="edit" className="edit-btn">
-                  <EditIcon style={{ color: 'white' }} />
-                </IconButton>
-              </Link>
-              <IconButton aria-label="delete" className="delete-btn " onClick={deleteThisVideo}>
-                <DeleteIcon style={{ color: 'white' }} />
-              </IconButton>
-            </div>
-          ) : (
-            <div />
-          )}
         </Card.Body>
       </Card>
     </div>
