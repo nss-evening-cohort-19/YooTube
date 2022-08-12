@@ -30,7 +30,7 @@ function ViewVideo() {
     getVideoLikes(firebaseKey).then(setLikes);
   };
   const getRelatedVideos = () => {
-    getPublicVideosbyCategory(video.category).then(setRelated);
+    getPublicVideosbyCategory(video.category).then((videos) => videos.filter((videoObj) => videoObj.videoFirebaseKey !== firebaseKey)).then(setRelated);
   };
 
   const handleClick = () => {
