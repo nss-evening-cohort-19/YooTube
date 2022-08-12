@@ -52,7 +52,7 @@ function Home() {
       <div className="text-center my-4">
         <div className="d-flex flex-wrap">
           {videos?.map((video) => (
-            <VideoCard key={video.videoFirebaseKey} obj={video} user={user} opts={{ height: '160', width: '280' }} onUpdate={getAllPublicVideos} />
+            <VideoCard key={video.videoFirebaseKey} name="indexVideo" obj={video} user={user} opts={{ height: '160', width: '280' }} onUpdate={getAllPublicVideos} />
           ))}
         </div>
       </div>

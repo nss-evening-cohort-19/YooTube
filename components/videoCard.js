@@ -78,7 +78,7 @@ function VideoCard({
 
   return (
     <div>
-      <Card className="videoCard" style={name === 'liked' ? { width: '100%' } : ''}>
+      <Card className="videoCard">
         <YouTube opts={opts} videoId={obj.videoId} />
         <Card.Body className="videoCardBody">
           <Image className="vidCardCreatorImage" src={obj.creatorImage} />
@@ -89,7 +89,7 @@ function VideoCard({
             <Card.Text className="vidCardCreatorName">{obj.creatorName}</Card.Text>
             <Card.Text className="uploaded">{obj.views} view{obj.views === 1 ? '' : 's'} • {uploadstatement}</Card.Text>
           </div>
-          <DropdownButton align="end" className="cardDropdown">
+          <DropdownButton align="end" className="cardDropdown" title="">
             {name === 'history' ? (
               <><Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}>Save to Watch Later</Dropdown.Item><Dropdown.Divider /><Dropdown.Item className="cardDropDownItem" onClick={removeFromHistory}>Remove From Watch History</Dropdown.Item></>
             ) : name === 'watch-later' ? (
