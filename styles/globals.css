@@ -84,11 +84,21 @@ body {
   justify-content: space-between;
   width:100%;
 }
+.viewVideCard{
+  margin-right: 5px;
+}
+
 .videosDiv{
   width: 100%;
 }
 .videoBody {
-width: 80%
+  width: 100%;
+}
+.relatedVideos{
+  margin-right: auto;
+  margin-left:100px;
+
+  
 }
 
 
@@ -98,6 +108,9 @@ width: 80%
   width: 100%;
   padding-left: 10px; 
   display:flex;
+  border-bottom: solid 1px black;
+  padding: 6px;
+
 }
 .commentUserImage{
   height: 40px;
@@ -171,4 +184,37 @@ align-items: center;
   flex-wrap: wrap;
   max-height: 630px;
   overflow: scroll;
+}
+
+/*LIKED VIDEOS PAGE*/
+.likedVideosContainer{
+  display: flex;
+}
+.likedUserInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+}
+.likedUserImage{
+  height: 40px;
+  width: 40px;
+  border-radius:  50%;
+  display: inline-block;
+}
+.likedVideos{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+/* LIKED VIDEO CARD */
+.likedVideoCard{
+  background-color:#181818;
+  color: #ffffff; 
+  margin: 6px;
+  display: flex;
+  height: 150px;
+}
+.likedVideoCardBody{
+cursor: default;
 }

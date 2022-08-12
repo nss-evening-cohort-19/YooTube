@@ -78,7 +78,7 @@ function VideoCard({
 
   return (
     <div>
-      <Card className="videoCard">
+      <Card className="videoCard" style={name === 'liked' ? { width: '100%' } : ''}>
         <YouTube opts={opts} videoId={obj.videoId} />
         <Card.Body className="videoCardBody">
           <Image className="vidCardCreatorImage" src={obj.creatorImage} />
