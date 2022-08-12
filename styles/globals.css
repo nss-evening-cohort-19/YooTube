@@ -190,9 +190,13 @@ align-items: center;
 .likedVideosPage{
   display: flex;
 }
+.likedHeader{
+  border-bottom: 1px solid black;
+}
 .userLikedDiv{
-  width: 25%;
+  width: 40%;
   height: 100%;
+  margin-right: 30px;
 }
 .likedUserImage{
   height: 40px;
@@ -200,12 +204,17 @@ align-items: center;
   border-radius:  50%;
   display: inline-block;
 }
+.likedUserName{
+  display: inline-block;
+  margin: 10px;
+}
 
 .likedVideosDiv{
   display: flex;
   flex-direction: column;
   width: 75%;
   height: 100%;
+  margin-top: 25px;
 }
 /* LIKED VIDEO CARD */
 
@@ -215,19 +224,16 @@ align-items: center;
   flex-wrap: wrap;
   flex-direction: row;
   margin: 4px;
+  border: .25px lightgrey solid;
 }
-.d-flex{
-display: block!important;
-width: 100%;
-} 
-.flex-wrap{
-  flex-wrap: nowrap!important;
-  width: 100%;
-}
+
 .likedCardBody{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+}
+.card-body{
+  padding: 8px!important;
 }
 .likedCardTitle{
   font-size: medium;
@@ -239,6 +245,14 @@ width: 100%;
   align-self: end;
   height: 100%;
 }
-/* .likedPlayer{
-  
-} */
+.likedPlayerDiv{
+  padding: 8px;
+}
+.likedPlayer{
+  display: flex;
+  margin-bottom: 15px;
+}
+.likedPlayer > iframe {
+  margin-left: auto;
+  margin-right: auto;
+}
