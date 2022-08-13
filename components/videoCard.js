@@ -44,7 +44,7 @@ function VideoCard({
   };
 
   const timeDifference = () => {
-    const diff = Math.abs(new Date() - new Date(obj.date.replace(/-/g, '/')));
+    const diff = Math.abs(new Date() - new Date(obj?.date.replace(/-/g, '/')));
     if (diff / 1000 < 60) {
       if ((diff / 1000 < 60) < 1.5) {
         return `${Math.round(diff / 1000)} Second Ago`;
@@ -79,19 +79,19 @@ function VideoCard({
   return (
     <div>
       <Card className="videoCard">
-        <YouTube opts={opts} videoId={obj.videoId} />
+        <YouTube opts={opts} videoId={obj?.videoId} />
         <Card.Body className="videoCardBody">
           <div className="vidCardImageDiv">
-            <Link href={`/channel/${obj.uid}`} passHref>
-              <Image className="vidCardCreatorImage" src={obj.creatorImage} />
+            <Link href={`/channel/${obj?.uid}`} passHref>
+              <Image className="vidCardCreatorImage" src={obj?.creatorImage} />
             </Link>
           </div>
           <div className="videoCardTextdiv">
-            <Link href={`/video/${obj.videoFirebaseKey}`} passHref>
-              <Card.Title className="vidCardTitle">{obj.title}</Card.Title>
+            <Link href={`/video/${obj?.videoFirebaseKey}`} passHref>
+              <Card.Title className="vidCardTitle">{obj?.title}</Card.Title>
             </Link>
-            <Card.Text className="vidCardCreatorName">{obj.creatorName}</Card.Text>
-            <Card.Text className="uploaded">{obj.views} view{obj.views === 1 ? '' : 's'} • {uploadstatement}</Card.Text>
+            <Card.Text className="vidCardCreatorName">{obj?.creatorName}</Card.Text>
+            <Card.Text className="uploaded">{obj?.views} view{obj?.views === 1 ? '' : 's'} • {uploadstatement}</Card.Text>
           </div>
           <DropdownButton align="end" className="cardDropdown" title={<FaEllipsisV className="droptoggleicon" />}>
             {name === 'history' ? (
