@@ -91,7 +91,6 @@ body {
 width: 80%
 }
 
-
 /* COMMENT CARD */
 
 .commentCard {
@@ -108,8 +107,6 @@ width: 80%
   margin-left: 6px;
   padding-right: 10px;
 }
-
-
 
 /*Other Stuff */ 
 .videoCallIcon {
@@ -130,10 +127,62 @@ width: 80%
   margin-top: 100px;
 }
 
+/* Your Videos and Profile View */
 .studio {
   display: flex;
   flex-direction: row;
 }
+
+/* .myVideosh2 {
+  text-align: left;
+} */
+
+.YootubeStudioLargeLogo-wrapper {
+  margin: 5px;
+}
+
+.myVideosLogoTitleDiv {
+  margin: 20px 0;
+  order: 0;
+}
+
+.myVideosDiv {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 40%;
+  margin: 0 40px;
+  order: 2;
+}
+
+.profileCardYourVideos {
+  order: 2;
+}
+
+@media only screen and (max-width: 550px) {
+  .card {
+    width: auto !important;
+    border: none;
+  }
+  .studio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .myVideosLogoTitleDiv {
+    order: 0;
+  }
+  .profileCardYourVideos {
+    order: 3;
+    border: none;
+  }
+  .myVideosDiv {
+    order: 10;
+    justify-content: start;
+  }
+}
+
+/* END OF YOURVIDEOS CSS */
 
 .mainPageFilterButtons {
   margin-right: 10px;
