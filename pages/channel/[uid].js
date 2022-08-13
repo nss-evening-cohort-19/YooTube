@@ -41,7 +41,7 @@ function UserVideos() {
         </Card>
       </div>
       <h2>User Videos</h2>
-      <div className="d-flex flex-wrap">
+      <div className="mainVideos">
         {videos?.map((video) => (
           <VideoCard key={video.videoFirebaseKey} obj={video} opts={{ height: '160', width: '280' }} onUpdate={getTheseVideos} router={router.asPath} />
         ))}
