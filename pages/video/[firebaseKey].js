@@ -8,6 +8,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 // import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import IconButton from '@mui/material/IconButton';
+import Link from 'next/link';
 import { addToUserHistory, getVideoAndComments } from '../../api/mergedData';
 import CommentCard from '../../components/CommentCard';
 import { useAuth } from '../../utils/context/authContext';
@@ -73,7 +74,9 @@ function ViewVideo() {
               <div className="videoTextdiv">
                 <Card.Title className="vidTitle">{video.title}</Card.Title>
                 <Card.Text className="videoDescription">{video.description}</Card.Text>
-                <Image className="vidCardCreatorImage" src={video.creatorImage} />
+                <Link href={`/channel/${video.uid}`} passHref>
+                  <Image className="vidCardCreatorImage" src={video.creatorImage} />
+                </Link>
                 <Card.Text className="vidCreatorName">{video.creatorName}</Card.Text>
                 <Card.Text className="vidDate">{video.date}</Card.Text>
               </div>

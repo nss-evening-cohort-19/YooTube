@@ -84,6 +84,9 @@ function VideoCard({
           <div className="vidCardImageDiv">
             <Image className="vidCardCreatorImage" src={obj.creatorImage} />
           </div>
+          <Link href={`/channel/${obj.uid}`} passHref>
+            <Image className="vidCardCreatorImage" src={obj.creatorImage} />
+          </Link>
           <div className="videoCardTextdiv">
             <Link href={`/video/${obj.videoFirebaseKey}`} passHref>
               <Card.Title className="vidCardTitle">{obj.title}</Card.Title>
