@@ -6,6 +6,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    max-width: none!important;
 }
 
 a {
@@ -20,6 +21,7 @@ a {
 body {
   background-color: #88effd;
 }
+
 
 /* VIDEO CARD STUFF */
 .videoCard{
@@ -76,14 +78,35 @@ body {
   font-size: 12px;
 }
 
-/* Library */
-.libraryVideoDivs {
-  display: flex;
-  flex-wrap: wrap;
-  max-height: 630px;
-  overflow: scroll;
+/*Single Video Page */
+.viewVideoPage{
+  display:flex;
+  justify-content: space-between;
+  width:100%;
+}
+.videosDiv{
+  width: 100%;
+}
+.videoBody {
+width: 80%
 }
 
+/* COMMENT CARD */
+
+.commentCard {
+  width: 100%;
+  padding-left: 10px; 
+  display:flex;
+}
+.commentUserImage{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+.commentCard .card-body {
+  margin-left: 6px;
+  padding-right: 10px;
+}
 
 /*Other Stuff */ 
 .videoCallIcon {
@@ -103,6 +126,7 @@ body {
 .container {
   margin-top: 100px;
 }
+
 /* Your Videos and Profile View */
 .studio {
   display: flex;
@@ -113,22 +137,52 @@ body {
   text-align: left;
 } */
 
-/* .YootubeStudioLargeLogo-wrapper {
-  min-width: 200px;
-  justify-content: left;
-  text-align: left;
-} */
+.YootubeStudioLargeLogo-wrapper {
+  margin: 5px;
+}
+
+.myVideosLogoTitleDiv {
+  margin: 20px 0;
+  order: 0;
+}
 
 .myVideosDiv {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
   width: 40%;
+  margin: 0 40px;
+  order: 2;
 }
 
 .profileCardYourVideos {
-  width: 40%;
+  order: 2;
 }
+
+@media only screen and (max-width: 550px) {
+  .card {
+    width: auto !important;
+    border: none;
+  }
+  .studio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .myVideosLogoTitleDiv {
+    order: 0;
+  }
+  .profileCardYourVideos {
+    order: 3;
+    border: none;
+  }
+  .myVideosDiv {
+    order: 10;
+    justify-content: start;
+  }
+}
+
+/* END OF YOURVIDEOS CSS */
 
 .mainPageFilterButtons {
   margin-right: 10px;
@@ -136,7 +190,7 @@ body {
 
 .uploaded {
   display: flex;
-  font-size: 12px;
+  font-size: 10px;
   color: lightgray;
   justify-content: left;
 }
@@ -144,4 +198,34 @@ body {
 .card-buttons {
   display: flex;
   align-self: flex-end;
+}
+
+/* Library */ 
+.libraryHeaders{
+  border-bottom: solid 2px black;
+}
+.libraryDefault{
+  margin-left: auto;
+  margin-right: auto;
+}
+.watchLaterDefault{
+  margin-left: auto;
+  margin-right: auto;
+display:flex;
+flex-direction: column;
+align-items: center;
+}
+.libraryVideoDivs {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 630px;
+  overflow: scroll;
+}
+
+.userChannel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
 }

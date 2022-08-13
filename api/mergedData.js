@@ -1,7 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 import { deleteComment, getVideoComments } from './commentData';
 import { getUser, updateUser } from './userData';
-import { deleteSingleVideo, getPublicVideos, getSingleVideo } from './videoData';
+import {
+  deleteSingleVideo, getPublicVideos, getSingleVideo, updateVideo,
+} from './videoData';
 import { getLikesByUser, getVideoLikes } from './likeData';
 
 const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
@@ -14,19 +16,31 @@ const getVideoAndComments = (firebaseKey) => new Promise((resolve, reject) => {
 
 const getUserHistory = (uid) => new Promise((resolve, reject) => {
   getUser(uid).then((userObj) => {
-    const getHistoryVideos = userObj.history.map((firebaseKey) => getSingleVideo(firebaseKey));
-    Promise.all(getHistoryVideos).then(resolve);
+    if (userObj.history) {
+      const getHistoryVideos = userObj.history.map((firebaseKey) => getSingleVideo(firebaseKey));
+      Promise.all(getHistoryVideos).then(resolve);
+    } else {
+      resolve([]);
+    }
   }).catch(reject);
 });
 
 const getUserWatchLater = (uid) => new Promise((resolve, reject) => {
   getUser(uid).then((userObj) => {
-    const getWatchLaterVideos = userObj.watchLater.map((firebaseKey) => getSingleVideo(firebaseKey));
-    Promise.all(getWatchLaterVideos).then(resolve);
+    if (userObj.watchLater) {
+      const getWatchLaterVideos = userObj.watchLater.map((firebaseKey) => getSingleVideo(firebaseKey));
+      Promise.all(getWatchLaterVideos).then(resolve);
+    } else {
+      resolve([]);
+    }
   }).catch(reject);
 });
 
 const addToUserHistory = (uid, videoFirebaseKey) => new Promise((resolve, reject) => {
+  getSingleVideo(videoFirebaseKey).then((video) => {
+    const payload = { views: video.views + 1 };
+    updateVideo(payload, videoFirebaseKey).then(resolve);
+  });
   getUser(uid).then((userObj) => {
     const userHistory = userObj.history;
     if (userObj.history === undefined) {
@@ -106,15 +120,6 @@ const getAllPublicVideosAndLikes = async () => {
   const mostLikedVideos = allPublicVideos.filter((video) => sortedVideoIdsWithLikes.includes(video.videoFirebaseKey));
   return mostLikedVideos;
 };
-
-// const getAllPubVidAndLikes = () => new Promise((resolve, reject) => {
-//   getPublicVideos().then((publicVideos) => {
-//     const allPubVideoLikes = publicVideos.map((video) => getVideoLikes(video.videoFirebaseKey));
-//     Promise.all(allPubVideoLikes).then((response) => {
-//       resolve(response);
-//     });
-//   }).catch((error) => reject(error));
-// });
 
 export {
   getVideoAndComments, getUsersLikedVideos, deleteVideoComments, getAllPublicVideosAndLikes, getUserHistory, addToUserHistory, addToUserWatchLater, getUserWatchLater, deleteUserHistory, deleteWatchLater,

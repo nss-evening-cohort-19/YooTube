@@ -28,6 +28,14 @@ const getSingleVideo = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getAllPublicVideoFirebaseKeys = () => new Promise((resolve, reject) => {
+  getPublicVideos().then((videos) => {
+    const vidKeys = videos.map((video) => video.videoFirebaseKey);
+    resolve(vidKeys);
+  })
+    .catch(reject);
+});
+
 const createVideo = (videoObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/videos.json`, videoObj)
     .then((response) => {
@@ -49,8 +57,8 @@ const getUserVideos = (uid) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const updateVideo = (videoObject) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/videos/${videoObject.videoFirebaseKey}.json`, videoObject)
+const updateVideo = (videoObject, videoFirebaseKey) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/videos/${videoFirebaseKey}.json`, videoObject)
     .then(() => {
       getUserVideos(videoObject.uid).then(resolve);
     })
@@ -66,5 +74,5 @@ const deleteSingleVideo = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 export {
-  createVideo, deleteSingleVideo, getPublicVideosbyCategory, updateVideo, getUserVideos, getSingleVideo, getPublicVideos,
+  createVideo, deleteSingleVideo, getPublicVideosbyCategory, updateVideo, getUserVideos, getSingleVideo, getPublicVideos, getAllPublicVideoFirebaseKeys,
 };
