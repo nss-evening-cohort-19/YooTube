@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
-import { Card, Image } from 'react-bootstrap';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from '@mui/material/IconButton';
+import {
+  Card, Image, DropdownButton, Dropdown,
+} from 'react-bootstrap';
+import {
+  FaEllipsisV, FaTrashAlt, FaPencilAlt,
+} from 'react-icons/fa';
 import { deleteComment, getVideoComments } from '../api/commentData';
 import { useAuth } from '../utils/context/authContext';
 
@@ -15,7 +17,7 @@ function CommentCard({ commentObj, onUpdate, setCommentToUpdate }) {
     }
   };
   const scroll = () => {
-    window.scrollTo(0, 0);
+    window.scrollTo(1, 0);
   };
 
   const { user } = useAuth();
@@ -29,19 +31,18 @@ function CommentCard({ commentObj, onUpdate, setCommentToUpdate }) {
       </Card.Body>
       { user.uid === commentObj.uid ? (
         <div>
-          <IconButton
-            aria-label="edit"
-            className="edit-btn"
-            onClick={() => {
-              setCommentToUpdate(commentObj);
-              scroll();
-            }}
-          >
-            <EditIcon style={{ color: 'blue' }} />
-          </IconButton>
-          <IconButton aria-label="delete" className="delete-btn " onClick={deleteThisComment}>
-            <DeleteIcon style={{ color: 'red' }} />
-          </IconButton>
+          <DropdownButton align="end" className="cardDropdown" title={<FaEllipsisV className="droptoggleicon" />}>
+            <Dropdown.Item
+              aria-label="edit"
+              className="cardDropDownItem"
+              onClick={() => {
+                setCommentToUpdate(commentObj);
+                scroll();
+              }}
+            ><FaPencilAlt className="dropIcon" /> Edit Comment
+            </Dropdown.Item>
+            <Dropdown.Item aria-label="delete" className="cardDropDownItem" onClick={deleteThisComment}><FaTrashAlt className="dropIcon" /> Delete Comment</Dropdown.Item>
+          </DropdownButton>
         </div>
       ) : '' }
     </Card.Body>

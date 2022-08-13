@@ -26,7 +26,7 @@ function LikedVideoCard({ obj, opts }) {
           <Card.Title className="likedCardTitle">{obj.title}</Card.Title>
         </Link>
         <Card.Text className="likedCardCreator">{obj.creatorName}</Card.Text>
-        <DropdownButton align="end" className="likedCardDropdown" title={<FaEllipsisV />}>
+        <DropdownButton align="end" className="likedCardDropdown" title={<FaEllipsisV className="droptoggleicon" />}>
           <Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}><FaClock className="dropIcon" /> Save to Watch Later</Dropdown.Item>
         </DropdownButton>
       </Card.Body>

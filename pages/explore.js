@@ -22,7 +22,7 @@ function Explore() {
   return (
     <div className="text-center my-4">
       <h1>Most Liked Videos</h1>
-      <div className="d-flex flex-wrap">
+      <div className="mainVideos">
         {videosWithLikes?.map((video) => (
           <VideoCard key={video.videoFirebaseKey} obj={video} user={user} opts={{ height: '160', width: '280' }} onUpdate={getMostLikedVideos} />
         ))}

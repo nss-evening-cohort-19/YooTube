@@ -59,6 +59,7 @@ body {
   display: flex;
   justify-content: space-between;
   cursor: default;
+  padding: 2px!important;
 }
 .videoCardTextdiv{
   display: flex;
@@ -66,10 +67,7 @@ body {
   align-items: flex-start;
 }
 .uploaded {
-  /* display: flex; */
   font-size: 11px;
-  /* color: lightgray; */
-  /* justify-content: left; */
 }
 .btn-primary {
   --bs-btn-color: none;
@@ -176,9 +174,9 @@ body {
 .watchLaterDefault{
   margin-left: auto;
   margin-right: auto;
-display:flex;
-flex-direction: column;
-align-items: center;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 }
 .libraryVideoDivs {
   display: flex;
@@ -275,11 +273,13 @@ padding-bottom: 2px;
 height: 22px;
 width: 22px;
 }
-.dropdown-toggle{
-  width: auto;
-  margin-right: 6px;
-  padding: none;
+.droptoggleicon{
+  padding-bottom: 2px;
+  padding-right: 15px;
+  height: 22px;
+  width: 22px;
 }
+
 
 /* Search Bar */
 .searchBar{

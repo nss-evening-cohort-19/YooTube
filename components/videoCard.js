@@ -91,7 +91,7 @@ function VideoCard({
             <Card.Text className="vidCardCreatorName">{obj.creatorName}</Card.Text>
             <Card.Text className="uploaded">{obj.views} view{obj.views === 1 ? '' : 's'} • {uploadstatement}</Card.Text>
           </div>
-          <DropdownButton align="end" className="cardDropdown" title={<FaEllipsisV className="dropIcon" />}>
+          <DropdownButton align="end" className="cardDropdown" title={<FaEllipsisV className="droptoggleicon" />}>
             {name === 'history' ? (
               <><Dropdown.Item className="cardDropDownItem" onClick={addToWatchLater}><FaClock className="dropIcon" /> Save to Watch Later</Dropdown.Item>
                 <Dropdown.Divider />
@@ -105,8 +105,8 @@ function VideoCard({
             {router === '/yourVideos' ? (
               <>
                 <Link href={`/video/edit/${obj.videoFirebaseKey}`} passHref>
-                  <Dropdown.Item aria-label="edit" className="cardDropDownItem"><FaPencilAlt /> Edit Video</Dropdown.Item>
-                </Link><Dropdown.Item aria-label="delete" className="cardDropDownItem" onClick={deleteThisVideo}><FaTrashAlt /> Delete Video</Dropdown.Item>
+                  <Dropdown.Item aria-label="edit" className="cardDropDownItem"><FaPencilAlt className="dropIcon" /> Edit Video</Dropdown.Item>
+                </Link><Dropdown.Item aria-label="delete" className="cardDropDownItem" onClick={deleteThisVideo}><FaTrashAlt className="dropIcon" /> Delete Video</Dropdown.Item>
               </>
             ) : (
               <div />
