@@ -18,6 +18,12 @@ const getUser = (uid) => new Promise((resolve, reject) => {
     .catch((reject));
 });
 
+const getChannelUser = (uid) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/users.json?orderBy="uid"&equalTo="${uid}"`)
+    .then((response) => resolve(Object.values(response.data)))
+    .catch((reject));
+});
+
 const updateUser = (uid, userUpdate) => new Promise((resolve, reject) => {
   getUser(uid).then((userObj) => {
     axios.patch(`${dbUrl}/users/${userObj.userFirebaseKey}.json`, userUpdate)
@@ -26,4 +32,6 @@ const updateUser = (uid, userUpdate) => new Promise((resolve, reject) => {
 });
 
 // eslint-disable-next-line import/prefer-default-export
-export { updateUser, getUser, addUser };
+export {
+  updateUser, getUser, addUser, getChannelUser,
+};
