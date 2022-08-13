@@ -69,7 +69,7 @@ function ViewVideo() {
       <div className="videosDiv">
         <div className="viewVideoDiv">
           <Card className="viewVideCard">
-            <YouTube opts={{ height: '390', width: '640' }} videoId={video.videoId} />
+            <YouTube opts={{ height: '483', width: '900' }} videoId={video.videoId} />
             <Card.Body className="videoBody">
               <div className="videoTextdiv">
                 <Card.Title className="vidTitle">{video.title}</Card.Title>

@@ -28,31 +28,46 @@ body {
   background-color:#181818;
   color: #ffffff;
   width: 282px; 
-  height: 300px;
+  height: 275px;
   margin: 6px;
 }
 .vidCardTitle{
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
+  width: 180px;
+  text-align: left;
+  height: 40px;
+  overflow: hidden;
+}
+.vidCardImageDiv{
+  height: 100%;
+  width: 30px;
 }
 .vidCardCreatorImage{
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
 }
 .vidCardCreatorName{
-  font-size: 10px;
+  font-size: 12px;
+  height: 12px;
 }
 .vidCardLikes{
-  font-size: 10px;
+  font-size: 11px;
 }
 .videoCardBody{
   display: flex;
+  justify-content: space-between;
   cursor: default;
+  padding: 2px!important;
 }
 .videoCardTextdiv{
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+}
+.uploaded {
+  font-size: 11px;
 }
 .btn-primary {
   --bs-btn-color: none;
@@ -70,13 +85,6 @@ body {
   --bs-btn-disabled-bg: none;
   --bs-btn-disabled-border-color: none;
 }
-.cardDropdown {
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background-color: gray!important;
-  font-size: 12px;
-}
 
 /*Single Video Page */
 .viewVideoPage{
@@ -84,11 +92,19 @@ body {
   justify-content: space-between;
   width:100%;
 }
+.viewVideCard{
+  margin-right: 5px;
+}
+
 .videosDiv{
   width: 100%;
 }
 .videoBody {
-width: 80%
+  width: 100%;
+}
+.relatedVideos{
+  margin-right: auto;
+  margin-left:100px;
 }
 
 /* COMMENT CARD */
@@ -97,6 +113,9 @@ width: 80%
   width: 100%;
   padding-left: 10px; 
   display:flex;
+  border-bottom: solid 1px black;
+  padding: 6px;
+
 }
 .commentUserImage{
   height: 40px;
@@ -144,13 +163,14 @@ width: 80%
 .myVideosLogoTitleDiv {
   margin: 20px 0;
   order: 0;
+  min-width: 25%;
 }
 
 .myVideosDiv {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  width: 40%;
+  width: 80%;
   margin: 0 40px;
   order: 2;
 }
@@ -188,13 +208,6 @@ width: 80%
   margin-right: 10px;
 }
 
-.uploaded {
-  display: flex;
-  font-size: 10px;
-  color: lightgray;
-  justify-content: left;
-}
-
 .card-buttons {
   display: flex;
   align-self: flex-end;
@@ -211,9 +224,9 @@ width: 80%
 .watchLaterDefault{
   margin-left: auto;
   margin-right: auto;
-display:flex;
-flex-direction: column;
-align-items: center;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 }
 .libraryVideoDivs {
   display: flex;
@@ -222,6 +235,115 @@ align-items: center;
   overflow: scroll;
 }
 
+/*LIKED VIDEOS PAGE*/
+.likedVideosPage{
+  display: flex;
+}
+.likedHeader{
+  border-bottom: 1px solid black;
+}
+.userLikedDiv{
+  width: 40%;
+  height: 100%;
+  margin-right: 30px;
+}
+.likedUserImage{
+  height: 40px;
+  width: 40px;
+  border-radius:  50%;
+  display: inline-block;
+}
+.likedUserName{
+  display: inline-block;
+  margin: 10px;
+}
+
+.likedVideosDiv{
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  height: 100%;
+  margin-top: 25px;
+}
+/* LIKED VIDEO CARD */
+
+.likedVideoCard{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 4px;
+  border: .25px lightgrey solid;
+}
+
+.likedCardBody{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.card-body{
+  padding: 8px!important;
+}
+.likedCardTitle{
+  font-size: medium;
+}
+.likedCardCreator{
+  font-size: small;
+}
+.likedCardDropdown{
+  align-self: end;
+  height: 100%;
+}
+.likedPlayerDiv{
+  padding: 8px;
+}
+.likedPlayer{
+  display: flex;
+  margin-bottom: 15px;
+}
+.likedPlayer > iframe {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/*Drop Down */
+.dropdown-toggle::after{
+display: none;
+}
+.cardDropdown {
+height: 20px;
+width: 20px;
+}
+.cardDropDownItem{
+  font-size: medium;
+}
+.dropIcon{
+padding-bottom: 2px;
+height: 22px;
+width: 22px;
+}
+.droptoggleicon{
+  padding-bottom: 2px;
+  padding-right: 15px;
+  height: 22px;
+  width: 22px;
+}
+
+
+/* Search Bar */
+.searchBar{
+  justify-content: center;
+}
+.css-w4z10b-MuiStack-root{
+  justify-content: center;
+}
+/*Index- Main Page*/
+.mainVideos{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .userChannel {
   display: flex;
   flex-wrap: wrap;

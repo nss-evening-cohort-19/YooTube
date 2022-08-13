@@ -168,7 +168,7 @@ export default function MiniDrawer() {
             </Navbar.Brand>
           </Link>
           <SearchBar />
-          <Nav className="justify-content-end">
+          <Nav className="searchBar justify-content-end">
             <Link passHref href="/video/new">
               <Nav.Item className="d-flex">
                 { user ? <MuiButton><VideoCallIcon className="videoCallIcon" /></MuiButton> : <></>}
