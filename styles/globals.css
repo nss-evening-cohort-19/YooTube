@@ -163,13 +163,14 @@ body {
 .myVideosLogoTitleDiv {
   margin: 20px 0;
   order: 0;
+  min-width: 25%;
 }
 
 .myVideosDiv {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  width: 40%;
+  width: 80%;
   margin: 0 40px;
   order: 2;
 }
