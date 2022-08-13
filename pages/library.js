@@ -31,7 +31,7 @@ function library() {
       <h3 className="libraryHeaders">History</h3>
       <div className="mainVideos">
         { history.length ? (history?.map((video) => (
-          <VideoCard key={video.videoFirebaseKey} obj={video} onUpdate={getLibraryData} name="history" opts={{ height: '160', width: '280' }} />
+          <VideoCard key={video?.videoFirebaseKey} obj={video} onUpdate={getLibraryData} name="history" opts={{ height: '160', width: '280' }} />
         ))
         ) : (
           <h6 className="libraryDefault">Watch some videos to make History !</h6>
