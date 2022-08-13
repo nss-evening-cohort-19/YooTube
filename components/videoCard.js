@@ -82,11 +82,10 @@ function VideoCard({
         <YouTube opts={opts} videoId={obj.videoId} />
         <Card.Body className="videoCardBody">
           <div className="vidCardImageDiv">
-            <Image className="vidCardCreatorImage" src={obj.creatorImage} />
+            <Link href={`/channel/${obj.uid}`} passHref>
+              <Image className="vidCardCreatorImage" src={obj.creatorImage} />
+            </Link>
           </div>
-          <Link href={`/channel/${obj.uid}`} passHref>
-            <Image className="vidCardCreatorImage" src={obj.creatorImage} />
-          </Link>
           <div className="videoCardTextdiv">
             <Link href={`/video/${obj.videoFirebaseKey}`} passHref>
               <Card.Title className="vidCardTitle">{obj.title}</Card.Title>
