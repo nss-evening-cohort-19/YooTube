@@ -164,6 +164,7 @@ export default function MiniDrawer() {
           <Link passHref href="/">
             <Navbar.Brand>
               <Image src={svgicon} alt="youtube" />
+              <h1 className="yootubeText">YooTube</h1>
             </Navbar.Brand>
           </Link>
           <SearchBar />
