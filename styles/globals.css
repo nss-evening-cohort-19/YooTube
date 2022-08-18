@@ -361,3 +361,7 @@ width: 22px;
   top: 15px;
   font-family: 'Roboto', sans-serif;
 }
+
+.filters {
+  margin-left: 300px;
+}

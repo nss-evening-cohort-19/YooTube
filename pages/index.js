@@ -35,7 +35,7 @@ function Home() {
 
   return (
     <>
-      <div className="catFilter">
+      <div className="catFilter filters">
         <Stack direction="row" spacing={1}>
           <Chip label="comedy" variant="outlined" onClick={handleClick} />
           <Chip label="education" variant="outlined" onClick={handleClick} />
