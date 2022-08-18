@@ -1,29 +1,29 @@
 {
-  "travel": {
-    "categoryName": "travel"
-  },
   "comedy": {
     "categoryName": "comedy"
-  },
-  "music": {
-    "categoryName": "music"
-  },
-  "food": {
-    "categoryName": "food"
-  },
-  "entertainment": {
-    "categoryName": "entertainment"
   },
   "education": {
     "categoryName": "education"
   },
+  "entertainment": {
+    "categoryName": "entertainment"
+  },
+  "food": {
+    "categoryName": "food"
+  },
   "movies": {
     "categoryName": "movies"
+  },
+  "music": {
+    "categoryName": "music"
+  },
+  "sports": {
+    "categoryName": "sports"
   },
   "television": {
     "categoryName": "television"
   },
-  "sports": {
-    "categoryName": "sports"
+  "travel": {
+    "categoryName": "travel"
   }
 }
