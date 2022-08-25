@@ -14,7 +14,7 @@ import CommentCard from '../../components/CommentCard';
 import { useAuth } from '../../utils/context/authContext';
 import { createLike, deleteSingleLike, getVideoLikes } from '../../api/likeData';
 import CommentForm from '../../components/forms/CommentForm';
-import { getPublicVideosbyCategory } from '../../api/videoData';
+import { getPublicVideosbyCategory, getSingleVideo } from '../../api/videoData';
 import VideoCard from '../../components/videoCard';
 
 function ViewVideo() {
@@ -30,8 +30,11 @@ function ViewVideo() {
     getVideoAndComments(firebaseKey).then(setVideo);
     getVideoLikes(firebaseKey).then(setLikes);
   };
+
   const getRelatedVideos = () => {
-    getPublicVideosbyCategory(video.category).then((videos) => videos.filter((videoObj) => videoObj.videoFirebaseKey !== firebaseKey)).then(setRelated);
+    getSingleVideo(firebaseKey).then((theVideo) => {
+      getPublicVideosbyCategory(theVideo.category).then((videos) => videos.filter((videoObj) => videoObj.videoFirebaseKey !== firebaseKey)).then(setRelated);
+    });
   };
 
   const handleClick = () => {
@@ -47,22 +50,17 @@ function ViewVideo() {
     }
   };
 
-  useEffect(() => {
-    getTheVideo();
-    getRelatedVideos();
-  }, [video.videoFirebaseKey, video]);
-
   const addVideoToUserHistory = () => {
     if (user) {
       addToUserHistory(user.uid, firebaseKey);
-    // eslint-disable-next-line no-empty
-    } else {
     }
   };
 
   useEffect(() => {
+    getTheVideo();
     addVideoToUserHistory();
-  }, []);
+    getRelatedVideos();
+  }, [router]);
 
   return (
     <div className="viewVideoPage">
